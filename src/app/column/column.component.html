@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="title">
+    <h2>{{ column.name }}</h2>
+    <button
+      mat-icon-button
+      [mat-menu-trigger-for]="menu"
+      aria-label="options"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="deleteColumn(column.id)" mat-menu-item>Delete column</button>
+    </mat-menu>
+  </div>
+
+  <div
+    cdkDropList
+    [cdkDropListData]="column.elements"
+    class="list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="box" *ngFor="let item of column.elements" cdkDrag>
+      {{ item.text }}
+    </div>
+  </div>
+</div>
