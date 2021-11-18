@@ -16,13 +16,14 @@ export class ColumnComponent {
   }
 
   @Input() column!: Column;
-  
+  @Output() onDel: EventEmitter<string> = new EventEmitter()
+  @Output() onDrop: EventEmitter<string> = new EventEmitter()
 
   deleteColumn(id: string) {
-    this.postService.deleteColumn(id)
+    this.onDel.emit(id)
   }
 
-  drop(event: CdkDragDrop<Post[]>) {
+  drop(event: CdkDragDrop<Post[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -33,6 +34,7 @@ export class ColumnComponent {
         event.currentIndex,
       );
     } 
+    this.onDrop.emit()
   }
 
 }

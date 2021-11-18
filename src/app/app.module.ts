@@ -10,6 +10,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ColumnComponent } from './column/column.component';
 import { CreateColumnComponent } from './column/create-column/create-column.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,14 +19,16 @@ import { FormsModule } from '@angular/forms';
     BoardPageComponent,
     ToolbarComponent,
     ColumnComponent,
-    CreateColumnComponent
+    CreateColumnComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

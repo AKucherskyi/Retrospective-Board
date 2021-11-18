@@ -7,3 +7,7 @@ export interface Column {
 export interface Post {
     text: string
 }
+
+export interface ColumnsObj {
+    [key: string] : object
+}

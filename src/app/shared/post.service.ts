@@ -1,12 +1,16 @@
-import { Column } from './interfaces';
+import { environment } from './../../environments/environment';
+import { Column, ColumnsObj } from './interfaces';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+
+  constructor (private http: HttpClient) {}
 
   todo = {
     elements: [{text:'Get to work'},{text:'Get to work'},{text:'Get to work'},],
@@ -30,21 +34,49 @@ export class PostService {
     id: '2'
   };
 
-  columns: Column[] = [this.done, this.notdone, this.todo]
+  columns: Column[] = []
 
-  constructor() { }
+  invokeColumnCreation: Subject<any> = new Subject()
 
   createColumn(name: string) {
-    this.columns.push({name, elements: [], id: this.columns.length.toString()})
-    console.log('create', this.columns);
+    const column = {name, elements: [
+      {text:'Get to work'},{text:'Get to work'},{text:'Get to work'},
+    ]}
+    return this.http.post<Column>(`${environment.fbDbUrl}/columns.json`, column)
+    .pipe(
+      map((response) => ({
+        id: response.name,
+        ...column
+      }))
+    )
   }
 
   getColumns(): Observable<Column[]> {
-    return of(this.columns).pipe(delay(1000))
+    return this.http.get(`${environment.fbDbUrl}/columns.json`)
+    .pipe(
+      map((response: {[key: string]: any}) => {
+        return Object
+        .keys(response)
+        .map((key) => ({
+          ...response[key],
+          id: key,
+          elements: ('elements' in response[key]) ? response[key].elements : []
+        }))
+      })
+    )
   }
 
-  deleteColumn(id: string) {
-    this.columns.push({name: id, elements: [], id: this.columns.length.toString()})
-    console.log('delete', this.columns);
+  updateColumns(columns: Column[]) {
+    let columnsObj = columns.reduce((acc: ColumnsObj , curr) => {
+      acc[curr.id] = {name: curr.name, elements: curr.elements}
+      return acc
+    }, {})
+    console.log(columnsObj)
+    return this.http.put<Column[]>(`${environment.fbDbUrl}/columns.json`, columnsObj)
+  }
+
+  deleteColumn(id: string): Observable<void> {
+    console.log('delete', id);
+    return this.http.delete<void>(`${environment.fbDbUrl}/columns/${id}.json`)
   }
 }
