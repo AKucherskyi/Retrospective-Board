@@ -7,10 +7,18 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SnackBarComponent,
+    LoaderComponent
+  ],
   imports: [
     CommonModule,
     MatIconModule,
@@ -20,7 +28,9 @@ import {MatInputModule} from '@angular/material/input';
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
-    
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     CommonModule,
@@ -31,6 +41,10 @@ import {MatInputModule} from '@angular/material/input';
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    LoaderComponent
   ]
 })
 export class SharedModule { }

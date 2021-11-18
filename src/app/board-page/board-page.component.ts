@@ -13,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
 export class BoardPageComponent implements OnInit {
   columns!: Column[];
 
+   loading!: boolean
+
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
@@ -24,6 +26,10 @@ export class BoardPageComponent implements OnInit {
       console.log(column)
       this.createColumn(column)
     })
+
+    this.postService.loading.subscribe((loading: boolean) => {
+      this.loading = loading
+    })
   }
 
   createColumn(column: Column) {
@@ -32,8 +38,6 @@ export class BoardPageComponent implements OnInit {
 
   updateColumns() {
     this.postService.updateColumns(this.columns).subscribe(() => {
-      console.log('updated');
-      
     })
   }
 

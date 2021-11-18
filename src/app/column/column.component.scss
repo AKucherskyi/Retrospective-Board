@@ -1,6 +1,7 @@
 :host {
   flex: 1 1 auto;
   padding: 10px;
+  color: #123c69;
 }
 
 .list {
@@ -8,7 +9,7 @@
   min-width: 200px;
   border-radius: 4px;
   overflow: hidden;
-
+  transition: all 0.5s ease-out;
   display: block;
 }
 
@@ -20,15 +21,45 @@
 .box {
   padding: 20px 10px;
   border: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(250, 246, 246, 0.87);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  background: white;
+  background: #ac3b61;
   font-size: 14px;
   margin-bottom: 20px;
+}
+
+.grey {
+  color: #999;
+}
+
+.form {
+  min-width: 150px;
+  width: 100%;
+  position: relative;;
+}
+
+
+.example-full-width {
+  width: 100%;
+}
+
+.button_add {
+  width: 100%;
+  color: #8c8c9e;
+  background: rgba(94,94,113,0.08);
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+
+.button_confirm {
+  position:absolute;
+  bottom: 18px;
+  right: 16px;
 }
 
 .cdk-drag-preview {

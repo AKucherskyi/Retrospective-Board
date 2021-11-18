@@ -1,3 +1,10 @@
-<div cdkDropListGroup class="container">
-    <app-column *ngFor="let column of columns" [column]="column" (onDel)="deleteColumn($event)" (onDrop)="updateColumns()"></app-column>
-  </div>
+<div cdkDropListGroup class="container" *ngIf="!loading; else spinner">
+  <app-column
+    *ngFor="let column of columns"
+    [column]="column"
+    (onDel)="deleteColumn($event)"
+    (onDrop)="updateColumns()"
+  ></app-column>
+</div>
+
+<ng-template #spinner><app-loader></app-loader></ng-template>

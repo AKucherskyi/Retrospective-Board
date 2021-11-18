@@ -1,6 +1,6 @@
 export interface Column {
     name: string
-    elements: Array<Post>
+    posts: Array<Post>
     id: string
 }
 

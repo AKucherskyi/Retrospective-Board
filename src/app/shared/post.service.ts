@@ -1,82 +1,84 @@
 import { environment } from './../../environments/environment';
-import { Column, ColumnsObj } from './interfaces';
+import { Column, ColumnsObj, Post } from './interfaces';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { tap, map, delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostService {
+  
+  numberOfColumns!: number;
 
-  constructor (private http: HttpClient) {}
+  invokeColumnCreation: Subject<any> = new Subject();
+  loading = new BehaviorSubject(false);
 
-  todo = {
-    elements: [{text:'Get to work'},{text:'Get to work'},{text:'Get to work'},],
-    name: 'Todo',
-    id: '0'
-  };
-
-  done = {
-    elements: [
-      {text:'Get to work'},{text:'Get to work'},{text:'Get to work'},
-    ],
-    name: 'Done',
-    id: '1'
-  };
-
-  notdone = {
-    elements: [
-      {text:'Get to work'},{text:'Get to work'},{text:'Get to work'},
-    ],
-    name: 'Not Done',
-    id: '2'
-  };
-
-  columns: Column[] = []
-
-  invokeColumnCreation: Subject<any> = new Subject()
+  constructor(private http: HttpClient) {}
 
   createColumn(name: string) {
-    const column = {name, elements: [
-      {text:'Get to work'},{text:'Get to work'},{text:'Get to work'},
-    ]}
-    return this.http.post<Column>(`${environment.fbDbUrl}/columns.json`, column)
-    .pipe(
-      map((response) => ({
-        id: response.name,
-        ...column
-      }))
-    )
+    this.loading.next(true);
+    const column = { name, posts: [] };
+    return this.http
+      .post<Column>(`${environment.fbDbUrl}/columns.json`, column)
+      .pipe(
+        map((response) => ({
+          id: response.name,
+          ...column,
+        })),
+        tap(() => {
+          this.numberOfColumns++;
+          this.loading.next(false);
+        })
+      );
   }
+
 
   getColumns(): Observable<Column[]> {
-    return this.http.get(`${environment.fbDbUrl}/columns.json`)
-    .pipe(
-      map((response: {[key: string]: any}) => {
-        return Object
-        .keys(response)
-        .map((key) => ({
+    return this.http.get(`${environment.fbDbUrl}/columns.json`).pipe(
+      map((response: { [key: string]: any }) => {
+        return Object.keys(response).map((key) => ({
           ...response[key],
           id: key,
-          elements: ('elements' in response[key]) ? response[key].elements : []
-        }))
+          posts: 'posts' in response[key] ? response[key].posts : [],
+        }));
+      }),
+      tap((columns: Column[]) => {
+        this.numberOfColumns = columns.length;
       })
-    )
+    );
   }
 
+
   updateColumns(columns: Column[]) {
-    let columnsObj = columns.reduce((acc: ColumnsObj , curr) => {
-      acc[curr.id] = {name: curr.name, elements: curr.elements}
-      return acc
-    }, {})
-    console.log(columnsObj)
-    return this.http.put<Column[]>(`${environment.fbDbUrl}/columns.json`, columnsObj)
+    let columnsObj = columns.reduce((acc: ColumnsObj, curr) => {
+      acc[curr.id] = { name: curr.name, posts: curr.posts };
+      return acc;
+    }, {});
+
+    return this.http.put<Column[]>(
+      `${environment.fbDbUrl}/columns.json`,
+      columnsObj
+    );
   }
 
   deleteColumn(id: string): Observable<void> {
-    console.log('delete', id);
-    return this.http.delete<void>(`${environment.fbDbUrl}/columns/${id}.json`)
+    this.loading.next(true);
+    return this.http
+      .delete<void>(`${environment.fbDbUrl}/columns/${id}.json`)
+      .pipe(
+        tap(() => {
+          this.numberOfColumns--;
+          this.loading.next(false);
+        })
+      );
+  }
+
+  createPost(post: Post, columnId: string, length: number): Observable<Post> {
+    return this.http.put<Post>(
+      `${environment.fbDbUrl}/columns/${columnId}/posts/${length}.json`,
+      post
+    );
   }
 }
