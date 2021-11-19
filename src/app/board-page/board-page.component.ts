@@ -22,14 +22,15 @@ export class BoardPageComponent implements OnInit {
       this.columns = columns;
     });
 
-    this.postService.invokeColumnCreation.subscribe((column) => {
+    this.postService.invokeColumnCreation$.subscribe((column) => {
       console.log(column)
       this.createColumn(column)
     })
 
-    this.postService.loading.subscribe((loading: boolean) => {
+    this.postService.loading$.subscribe((loading: boolean) => {
       this.loading = loading
     })
+
   }
 
   createColumn(column: Column) {

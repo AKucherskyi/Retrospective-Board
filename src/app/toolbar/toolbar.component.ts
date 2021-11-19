@@ -1,4 +1,4 @@
-import { SnackBarComponent } from './../shared/snack-bar/snack-bar.component';
+import { SnackBarComponent } from '../shared/snack-bars/snack-bar/snack-bar.component';
 import { PostService } from '../shared/post.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -41,7 +41,7 @@ export class ToolbarComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           this.postService.createColumn(result).subscribe((column) => {
-            this.postService.invokeColumnCreation.next(column);
+            this.postService.invokeColumnCreation$.next(column);
           });
         }
       });

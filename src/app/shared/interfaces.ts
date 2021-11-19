@@ -11,3 +11,15 @@ export interface Post {
 export interface ColumnsObj {
     [key: string] : object
 }
+
+export interface User {
+    email: string
+    password: string
+    name?: string
+    returnSecureToken?: boolean
+}
+
+export interface FbAuthResponse {
+    idToken: string
+    expiresIn: string
+}

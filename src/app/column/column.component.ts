@@ -62,7 +62,7 @@ export class ColumnComponent implements OnInit {
     })
   }
 
-  
+
   drop(event: CdkDragDrop<Post[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

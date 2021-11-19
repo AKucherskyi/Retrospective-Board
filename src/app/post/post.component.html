@@ -1,0 +1,15 @@
+<mat-card cdkDrag>
+    <mat-card-content>{{post.text}}</mat-card-content>
+    <button mat-icon-button [mat-menu-trigger-for]="menu" aria-label="options" class="more">
+        <mat-icon class="grey">more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="deletePost()" mat-menu-item>
+          Delete post
+        </button>
+      </mat-menu>
+    <mat-card-actions align="end">
+      <button mat-icon-button><mat-icon>thumb_up_off_alt</mat-icon> 0</button>
+      <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon> 0</button>
+    </mat-card-actions>
+  </mat-card>

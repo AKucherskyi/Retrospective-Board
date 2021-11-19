@@ -8,16 +8,19 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { SnackBarComponent } from './snack-bars/snack-bar/snack-bar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoaderComponent } from './loader/loader.component';
+import {MatCardModule} from '@angular/material/card';
+import { SnackBarAuthComponent } from './snack-bars/snack-bar-auth/snack-bar-auth.component';
 
 
 @NgModule({
   declarations: [
     SnackBarComponent,
-    LoaderComponent
+    LoaderComponent,
+    SnackBarAuthComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { LoaderComponent } from './loader/loader.component';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatCardModule,
   ],
   exports: [
     CommonModule,
@@ -44,7 +48,8 @@ import { LoaderComponent } from './loader/loader.component';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    LoaderComponent
+    LoaderComponent,
+    MatCardModule
   ]
 })
 export class SharedModule { }

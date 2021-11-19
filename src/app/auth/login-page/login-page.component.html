@@ -1,0 +1,12 @@
+
+  <div class="login-wr">
+    <h2>Login</h2>
+
+    <form class="form" [formGroup]="form" (submit)="submit()">
+      <input formControlName="email" type="email" placeholder="Email" />
+      <input formControlName="password" type="password" placeholder="Password" />
+      <a href="#"> <p>Don't have account? Register</p></a>
+      <button type="submit" [disabled]="!form.valid" mat-raised-button color="primary">Login</button>
+    </form>
+  </div>
+

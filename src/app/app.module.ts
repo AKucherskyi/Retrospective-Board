@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,8 +10,19 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ColumnComponent } from './column/column.component';
 import { CreateColumnComponent } from './column/create-column/create-column.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PostComponent } from './post/post.component';
+import { HeaderComponent } from './header/header.component';
+import { LoginPageComponent } from './auth/login-page/login-page.component';
+import { RegisterPageComponent } from './auth/register-page/register-page.component';
+import { AuthInterceptor } from './shared/auth.interceptor';
 
+
+const INTERCEPROR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor
+}
 
 @NgModule({
   declarations: [
@@ -20,6 +31,11 @@ import { HttpClientModule } from '@angular/common/http';
     ToolbarComponent,
     ColumnComponent,
     CreateColumnComponent,
+    PostComponent,
+    HeaderComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -30,7 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [INTERCEPROR_PROVIDER],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

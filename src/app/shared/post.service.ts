@@ -12,13 +12,13 @@ export class PostService {
   
   numberOfColumns!: number;
 
-  invokeColumnCreation: Subject<any> = new Subject();
-  loading = new BehaviorSubject(false);
+  invokeColumnCreation$: Subject<any> = new Subject();
+  loading$ = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {}
 
   createColumn(name: string) {
-    this.loading.next(true);
+    this.loading$.next(true);
     const column = { name, posts: [] };
     return this.http
       .post<Column>(`${environment.fbDbUrl}/columns.json`, column)
@@ -29,13 +29,14 @@ export class PostService {
         })),
         tap(() => {
           this.numberOfColumns++;
-          this.loading.next(false);
+          this.loading$.next(false);
         })
       );
   }
 
 
   getColumns(): Observable<Column[]> {
+    this.loading$.next(true);
     return this.http.get(`${environment.fbDbUrl}/columns.json`).pipe(
       map((response: { [key: string]: any }) => {
         return Object.keys(response).map((key) => ({
@@ -46,6 +47,7 @@ export class PostService {
       }),
       tap((columns: Column[]) => {
         this.numberOfColumns = columns.length;
+        this.loading$.next(false);
       })
     );
   }
@@ -64,13 +66,13 @@ export class PostService {
   }
 
   deleteColumn(id: string): Observable<void> {
-    this.loading.next(true);
+    this.loading$.next(true);
     return this.http
       .delete<void>(`${environment.fbDbUrl}/columns/${id}.json`)
       .pipe(
         tap(() => {
           this.numberOfColumns--;
-          this.loading.next(false);
+          this.loading$.next(false);
         })
       );
   }

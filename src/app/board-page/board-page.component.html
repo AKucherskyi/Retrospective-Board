@@ -1,4 +1,6 @@
-<div cdkDropListGroup class="container" *ngIf="!loading; else spinner">
+<app-toolbar></app-toolbar>
+
+<div cdkDropListGroup  class="container" *ngIf="!loading; else spinner">
   <app-column
     *ngFor="let column of columns"
     [column]="column"

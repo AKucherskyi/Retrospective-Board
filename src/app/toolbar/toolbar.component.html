@@ -1,31 +1,21 @@
-<header>
-  <mat-toolbar class="toolbar">
-    <a routerLink="/board">
-      <img
-        src="https://xn--80aed5aobb1a.xn--p1ai/wp-content/uploads/rolls-royce-rr-logo-1920x1080.png"
-        alt="logo"
-      />
-    </a>
-    <span class="example-spacer"></span>
-    <div>Retrospective board</div>
-    <span class="example-spacer"></span>
-    <button
-      mat-icon-button
-     [mat-menu-trigger-for]="menu"
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
-    >
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button (click)="openDialog()" mat-menu-item>Add column</button>
-      </mat-menu>
-    <button
-      mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with share icon"
-    >
-      <mat-icon>share</mat-icon>
-    </button>
-  </mat-toolbar>
-</header>
+<mat-toolbar class="toolbar">
+  <button
+    mat-icon-button
+    [mat-menu-trigger-for]="menu"
+    class="icon"
+    aria-label="icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button (click)="openDialog()" mat-menu-item>Add column</button>
+  </mat-menu>
+  <button
+    mat-icon-button
+    class="icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+<hr>
