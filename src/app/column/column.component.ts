@@ -62,6 +62,13 @@ export class ColumnComponent implements OnInit {
     })
   }
 
+  addLike([postId, likes]: [number, number]) {
+    this.postService.addLike([postId, this.column.id, likes]).subscribe((result) => {
+      console.log(result);
+      
+    })
+  }
+
 
   drop(event: CdkDragDrop<Post[]>): void {
     if (event.previousContainer === event.container) {

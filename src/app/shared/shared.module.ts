@@ -8,7 +8,6 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SnackBarComponent } from './snack-bars/snack-bar/snack-bar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoaderComponent } from './loader/loader.component';
@@ -18,7 +17,6 @@ import { SnackBarAuthComponent } from './snack-bars/snack-bar-auth/snack-bar-aut
 
 @NgModule({
   declarations: [
-    SnackBarComponent,
     LoaderComponent,
     SnackBarAuthComponent
   ],

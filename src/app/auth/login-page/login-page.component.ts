@@ -33,6 +33,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.auth.login(user).subscribe(() => {
+      localStorage.setItem('email', user.email)
       this.auth.username$.next(user.email)
       this.form.reset()
       this.router.navigate(['/board'])

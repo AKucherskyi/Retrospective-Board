@@ -78,9 +78,17 @@ export class PostService {
   }
 
   createPost(post: Post, columnId: string, length: number): Observable<Post> {
+    post.likes = 0
     return this.http.put<Post>(
       `${environment.fbDbUrl}/columns/${columnId}/posts/${length}.json`,
       post
+    );
+  }
+
+  addLike([postId, columnId, likes]: [number, string, number]): Observable<any> {
+    return this.http.patch(
+      `${environment.fbDbUrl}/columns/${columnId}/posts/${postId}.json`,
+      {likes}
     );
   }
 }

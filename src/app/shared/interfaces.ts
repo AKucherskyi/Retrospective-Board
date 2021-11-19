@@ -6,6 +6,7 @@ export interface Column {
 
 export interface Post {
     text: string
+    likes?: number
 }
 
 export interface ColumnsObj {

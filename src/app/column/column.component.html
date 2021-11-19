@@ -43,6 +43,6 @@
     class="list"
     (cdkDropListDropped)="drop($event)"
   >
-    <app-post *ngFor="let post of column.posts" [post]="post"></app-post>
+    <app-post *ngFor="let post of column.posts; let id = index" [post]="post" [id]="id" (onLike)="addLike($event)"></app-post>
   </div>
 </div>

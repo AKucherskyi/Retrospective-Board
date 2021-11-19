@@ -10,7 +10,7 @@ import { SnackBarAuthComponent } from '../shared/snack-bars/snack-bar-auth/snack
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  name: string = 'Anonymous';
+  name: string | null = 'Anonymous';
 
   constructor(
     private router: Router,
@@ -23,6 +23,10 @@ export class HeaderComponent implements OnInit {
     this.auth.username$.subscribe((name) => {
       this.name = name
     })
+
+    if (localStorage.getItem('email')) {
+      this.name = localStorage.getItem('email')
+    }
 
     this.route.queryParams.subscribe((params: Params) => {
       if (params['authFailed']) {
@@ -38,8 +42,8 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.auth.logout();
-    this.router.navigate(['/login']);
     this.auth.username$.next('Anonymous')
+    this.router.navigate(['/login']);
   }
 
   openSnackBar(): void {

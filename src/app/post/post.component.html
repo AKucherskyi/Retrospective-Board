@@ -9,7 +9,7 @@
         </button>
       </mat-menu>
     <mat-card-actions align="end">
-      <button mat-icon-button><mat-icon>thumb_up_off_alt</mat-icon> 0</button>
+      <button mat-icon-button (click)="addLike()" ><mat-icon [ngClass]="{black: !liked}" >thumb_up_off_alt</mat-icon > {{post.likes}}</button>
       <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon> 0</button>
     </mat-card-actions>
   </mat-card>

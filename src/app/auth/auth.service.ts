@@ -3,7 +3,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { User } from '../shared/interfaces';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { User } from '../shared/interfaces';
 export class AuthService {
 
   public error$: Subject<string> = new Subject<string>()
-  public username$: Subject<string> = new Subject<string>()
+  public username$: BehaviorSubject<string> = new BehaviorSubject<string>('Anonymous')
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +31,10 @@ export class AuthService {
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
       user
     ).pipe(
-      tap((response) => {this.setToken(response as FbAuthResponse)}),
+      tap((response) => {
+        this.setToken(response as FbAuthResponse)
+        localStorage
+      }),
       catchError(this.handleError.bind(this))
     )
   }
