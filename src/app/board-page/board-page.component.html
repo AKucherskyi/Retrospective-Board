@@ -2,6 +2,7 @@
 
 <div cdkDropListGroup  class="container" *ngIf="!loading; else spinner">
   <app-column
+  [ngStyle] = "{'max-width': 'calc(100% / ' + columns.length + ')'}"
     *ngFor="let column of columns"
     [column]="column"
     (onDel)="deleteColumn($event)"

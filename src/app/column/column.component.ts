@@ -1,3 +1,4 @@
+import { Animations } from './../shared/animations';
 import { PostService } from './../shared/post.service';
 import { Column, Post } from './../shared/interfaces';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -10,20 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
-  animations: [
-    trigger(
-      'enterAnimation', [
-        transition(':enter', [
-          style({transform: 'translateY(-100%)', opacity: 0}),
-          animate('100ms', style({transform: 'translateX(0)', opacity: 1}))
-        ]),
-        transition(':leave', [
-          style({ opacity: 1}),
-          animate('100ms', style({ opacity: 0}))
-        ])
-      ]
-    )
-  ],
+  animations: [Animations.enterAnimation],
 })
 export class ColumnComponent implements OnInit {
 
@@ -44,8 +32,14 @@ export class ColumnComponent implements OnInit {
   }
 
 
-  deleteColumn(id: string) {
-    this.onDel.emit(id)
+  deleteColumn() {
+    this.onDel.emit(this.column.id)
+  }
+
+  clearColumn() {
+    for (let i = 0; i < this.column.posts.length; i++) {
+      this.deletePost(i)
+    }
   }
 
 
@@ -62,10 +56,14 @@ export class ColumnComponent implements OnInit {
     })
   }
 
+  deletePost(postId: number) {
+    this.postService.deletePost(postId, this.column.id).subscribe(() => {
+      this.column.posts.splice(postId, 1)
+    }) 
+  }
+
   addLike([postId, likes]: [number, number]) {
-    this.postService.addLike([postId, this.column.id, likes]).subscribe((result) => {
-      console.log(result);
-      
+    this.postService.addLike(postId, this.column.id, likes).subscribe((result) => {
     })
   }
 

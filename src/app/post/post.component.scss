@@ -27,7 +27,11 @@
 
  .mat-card-title {
      font-size: 14px;
-     
+ }
+
+ .mat-card-content {
+   padding: 15px;
+   word-wrap: break-word;
  }
 
  .black {

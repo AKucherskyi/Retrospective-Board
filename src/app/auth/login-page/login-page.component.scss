@@ -28,10 +28,13 @@
  input[type="email"], 
  input[type="password"],
  button {
-    margin-bottom: 25px;
     padding: 0 30px;
     height: 40px;
     outline: 0;
+}
+
+button {
+    margin-bottom: 25px;
 }
       
 
@@ -63,3 +66,21 @@ a:hover {
  p {
 	padding-bottom: 10px;
 }
+
+.validation {
+    color: #cc1f00;
+}
+
+.input {
+    margin-bottom: 25px;
+}
+
+.alert {
+    padding: 0.7rem;
+    margin: 1rem 0;
+    opacity: 0.9;
+    background: #fca27e;
+    color: #333;
+    width: calc(80% - 45px);
+    margin: 0 auto;
+  }

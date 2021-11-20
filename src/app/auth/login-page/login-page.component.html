@@ -1,12 +1,59 @@
+<div class="login-wr">
+  <h2>Login</h2>
 
-  <div class="login-wr">
-    <h2>Login</h2>
-
-    <form class="form" [formGroup]="form" (submit)="submit()">
-      <input formControlName="email" type="email" placeholder="Email" />
-      <input formControlName="password" type="password" placeholder="Password" />
-      <a href="#"> <p>Don't have account? Register</p></a>
-      <button type="submit" [disabled]="!form.valid" mat-raised-button color="primary">Login</button>
-    </form>
+  <div class="alert" *ngIf="auth.error$ | async as error">
+    {{ error }}
   </div>
 
+  <form class="form" [formGroup]="form" (submit)="submit()">
+    <div class="input">
+      <input formControlName="email" type="email" placeholder="Email" />
+      <div
+        class="validation"
+        *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+      >
+        <small *ngIf="form.get('email')?.errors?.required"
+          >Поле не должно быть пустым</small
+        >
+        <small *ngIf="form.get('email')?.errors?.email"
+          >Поле должно быть email</small
+        >
+      </div>
+    </div>
+
+    <div class="input">
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="Password"
+      />
+      <div
+        class="validation"
+        *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
+      >
+        <small *ngIf="form.get('password')?.errors?.required"
+          >Поле не должно быть пустым</small
+        >
+        <small *ngIf="form.get('password')?.errors?.minlength"
+          >Пароль должен быть не менее
+          {{ form.get("password")?.errors?.minlength.requiredLength }} символов
+          сейчас он
+          {{
+            form.get("password")?.errors?.minlength.actualLength
+          }}
+          символа</small
+        >
+      </div>
+    </div>
+
+    <a routerLink="/register"> <p>Don't have account? Register</p></a>
+    <button
+      type="submit"
+      [disabled]="!form.valid"
+      mat-raised-button
+      color="primary"
+    >
+      Login
+    </button>
+  </form>
+</div>

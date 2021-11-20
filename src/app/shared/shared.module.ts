@@ -13,10 +13,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoaderComponent } from './loader/loader.component';
 import {MatCardModule} from '@angular/material/card';
 import { SnackBarAuthComponent } from './snack-bars/snack-bar-auth/snack-bar-auth.component';
+import { SnackBarComponent } from './snack-bars/snack-bar/snack-bar.component';
 
 
 @NgModule({
   declarations: [
+    SnackBarComponent,
     LoaderComponent,
     SnackBarAuthComponent
   ],

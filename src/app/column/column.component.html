@@ -5,8 +5,12 @@
       <mat-icon class="grey">more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button (click)="deleteColumn(column.id)" mat-menu-item>
+      <button (click)="deleteColumn()" mat-menu-item>
         Delete column
+      </button>
+      <hr>
+      <button (click)="clearColumn()" mat-menu-item>
+        Clear column
       </button>
     </mat-menu>
   </div>
@@ -43,6 +47,12 @@
     class="list"
     (cdkDropListDropped)="drop($event)"
   >
-    <app-post *ngFor="let post of column.posts; let id = index" [post]="post" [id]="id" (onLike)="addLike($event)"></app-post>
+    <app-post
+      *ngFor="let post of column.posts; let id = index"
+      [post]="post"
+      [id]="id"
+      (onLike)="addLike($event)"
+      (onDel)="deletePost($event)"
+    ></app-post>
   </div>
 </div>

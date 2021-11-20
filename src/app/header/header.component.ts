@@ -1,8 +1,8 @@
+import { SnackBarService } from './../shared/snack-bars/snack-bar.service';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { SnackBarAuthComponent } from '../shared/snack-bars/snack-bar-auth/snack-bar-auth.component';
+
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     public auth: AuthService,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
     this.route.queryParams.subscribe((params: Params) => {
       if (params['authFailed']) {
-        this.openSnackBar()
+        this.snackBarService.openSnackBar('AUTH')
         this.router.navigate(['board'])
       }
     });
@@ -40,15 +40,14 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  register() {
+    this.router.navigate(['/register'])
+  }
+
   logout() {
     this.auth.logout();
     this.auth.username$.next('Anonymous')
     this.router.navigate(['/login']);
   }
 
-  openSnackBar(): void {
-    this._snackBar.openFromComponent(SnackBarAuthComponent, {
-      duration: 5000,
-    });
-  }
 }

@@ -1,10 +1,8 @@
-import { SnackBarComponent } from '../shared/snack-bar/snack-bar.component';
+import { SnackBarService } from './../shared/snack-bars/snack-bar.service';
 import { PostService } from '../shared/post.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateColumnComponent } from '../column/create-column/create-column.component';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-toolbar',
@@ -17,21 +15,14 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private postService: PostService,
-    private router: Router,
-    private _snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {}
 
-  openSnackBar(): void {
-    this._snackBar.openFromComponent(SnackBarComponent, {
-      duration: 5000,
-    });
-  }
-
   openDialog(): void {
     if (this.postService.numberOfColumns >= 5) {
-      this.openSnackBar();
+      this.snackBarService.openSnackBar('COLUMNS');
       return;
     } else {
       const dialogRef = this.dialog.open(CreateColumnComponent, {

@@ -85,10 +85,16 @@ export class PostService {
     );
   }
 
-  addLike([postId, columnId, likes]: [number, string, number]): Observable<any> {
+  addLike(postId: number, columnId: string, likes: number): Observable<any> {
     return this.http.patch(
       `${environment.fbDbUrl}/columns/${columnId}/posts/${postId}.json`,
       {likes}
+    );
+  }
+
+  deletePost(postId: number, columnId: string): Observable<any> {
+    return this.http.delete(
+      `${environment.fbDbUrl}/columns/${columnId}/posts/${postId}.json`
     );
   }
 }

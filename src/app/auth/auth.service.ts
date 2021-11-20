@@ -33,7 +33,17 @@ export class AuthService {
     ).pipe(
       tap((response) => {
         this.setToken(response as FbAuthResponse)
-        localStorage
+      }),
+      catchError(this.handleError.bind(this))
+    )
+  }
+
+  register(user: User): Observable<any> {
+    user.returnSecureToken = true
+    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`, user)
+    .pipe(
+      tap((response) => {
+        this.setToken(response as FbAuthResponse)
       }),
       catchError(this.handleError.bind(this))
     )
