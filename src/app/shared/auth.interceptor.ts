@@ -1,7 +1,7 @@
 import { PostService } from './post.service';
 import { AuthService } from './../auth/auth.service';
 import {
-    HttpErrorResponse,
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -14,14 +14,16 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private auth: AuthService, private postService: PostService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private postService: PostService
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-      console.log('Intercept');
-      
     if (this.auth.isAuthenticated()) {
       req = req.clone({
         setParams: {
@@ -29,20 +31,22 @@ export class AuthInterceptor implements HttpInterceptor {
         },
       });
     }
+
     return next.handle(req).pipe(
-        catchError((error: HttpErrorResponse) => {
-            console.log('[Interceptor error]: ', error);
-            if (error.status === 401) {
-                this.auth.logout()
-                this.router.navigate(['/board'], {
-                    queryParams: {
-                        authFailed: true
-                    }
-                })
-                this.postService.loading$.next(false)
-            }
-            return throwError(error)
-        })
-    )
+      catchError((error: HttpErrorResponse) => {
+        console.log('[Interceptor error]: ', error);
+        if (error.status === 401) {
+          this.auth.logout();
+          this.router.navigate(['/board'], {
+            queryParams: {
+              authFailed: true,
+            },
+          });
+          this.postService.loading$.next(false);
+        }
+        return throwError(error);
+      })
+    );
   }
+  
 }

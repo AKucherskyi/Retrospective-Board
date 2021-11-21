@@ -1,3 +1,4 @@
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { SnackBarService } from './../shared/snack-bars/snack-bar.service';
 import { AuthService } from './../auth/auth.service';
@@ -13,18 +14,24 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class PostComponent implements OnInit {
   liked: boolean = false;
 
+  showTextarea: boolean = false
+  form!: FormGroup
+
   @Input() post!: Post;
   @Input() id!: number;
   @Output() onLike: EventEmitter<[number, number]> = new EventEmitter();
   @Output() onDel: EventEmitter<number> = new EventEmitter();
 
   constructor(
-    private postService: PostService,
     private auth: AuthService,
     private snackBarService: SnackBarService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form = new FormGroup({
+      text: new FormControl('')
+    })
+  }
 
   deletePost() {
     this.onDel.emit(this.id);

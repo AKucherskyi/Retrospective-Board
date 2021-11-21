@@ -25,8 +25,7 @@
     
 }
 
- input[type="email"], 
- input[type="password"],
+ input,
  button {
     padding: 0 30px;
     height: 40px;
@@ -34,8 +33,7 @@
 }
       
 
- input[type="email"],
- input[type="password"] {
+ input {
     width: calc(80% - 45px);
     border: 1px solid #bbb;
     padding: 0 0 0 15px;
@@ -43,8 +41,7 @@
 }
 
 
- input[type="email"]:focus,
- input[type="password"]:focus {
+ input:focus {
     border: 1px solid #2196f3;
 }  
 
@@ -83,4 +80,8 @@ a:hover {
     color: #333;
     width: calc(80% - 45px);
     margin: 0 auto;
+  }
+
+  input.ng-touched.ng-invalid {
+    border: 1px solid #ff2121;
   }

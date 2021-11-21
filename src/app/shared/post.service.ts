@@ -9,7 +9,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PostService {
-  
   numberOfColumns!: number;
 
   invokeColumnCreation$: Subject<any> = new Subject();
@@ -34,11 +33,13 @@ export class PostService {
       );
   }
 
-
   getColumns(): Observable<Column[]> {
     this.loading$.next(true);
     return this.http.get(`${environment.fbDbUrl}/columns.json`).pipe(
       map((response: { [key: string]: any }) => {
+        if (!response) {
+          return [];
+        }
         return Object.keys(response).map((key) => ({
           ...response[key],
           id: key,
@@ -51,7 +52,6 @@ export class PostService {
       })
     );
   }
-
 
   updateColumns(columns: Column[]) {
     let columnsObj = columns.reduce((acc: ColumnsObj, curr) => {
@@ -77,8 +77,14 @@ export class PostService {
       );
   }
 
+  clearColumn(id: string): Observable<void> {
+    return this.http.delete<void>(
+      `${environment.fbDbUrl}/columns/${id}/posts.json`
+    );
+  }
+
   createPost(post: Post, columnId: string, length: number): Observable<Post> {
-    post.likes = 0
+    post.likes = 0;
     return this.http.put<Post>(
       `${environment.fbDbUrl}/columns/${columnId}/posts/${length}.json`,
       post
@@ -88,7 +94,7 @@ export class PostService {
   addLike(postId: number, columnId: string, likes: number): Observable<any> {
     return this.http.patch(
       `${environment.fbDbUrl}/columns/${columnId}/posts/${postId}.json`,
-      {likes}
+      { likes }
     );
   }
 

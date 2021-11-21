@@ -18,7 +18,7 @@
   }
   
  .mat-card {
-    cursor: pointer;
+    cursor: grab;
     background: #ac3b61;
     color: rgb(230, 230, 230);
     position: relative;
@@ -29,10 +29,15 @@
      font-size: 14px;
  }
 
- .mat-card-content {
-   padding: 15px;
+ .mat-card-title {
+   margin: 0;
+   padding: 0 20px 0 5px;
    word-wrap: break-word;
  }
+
+.mat-card-actions {
+  padding: 0;
+}
 
  .black {
    color: rgb(58, 58, 58);
@@ -43,6 +48,16 @@
      
  }
 
+ .textarea {
+   background-color: #ececec;
+   width: 100%;
+   color: rgb(46, 46, 46);
+ }
+
+ .textarea:focus {
+   outline: 1px solid rgb(224, 224, 224);
+ }
+
  .more {
      position: absolute;
      top: 3px;
@@ -50,4 +65,16 @@
      margin-right: 0;
 
  }
+
+ .button_confirm {
+  position:absolute;
+  bottom: 18px;
+  right: 13px;
+}
+
+.button_discard {
+  position:absolute;
+  bottom: 18px;
+  right: 38px;
+}
 

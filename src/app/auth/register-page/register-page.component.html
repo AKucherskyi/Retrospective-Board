@@ -1,7 +1,23 @@
 <div class="login-wr">
   <h2>Register</h2>
 
-  <form class="form" [formGroup]="form" (submit)="submit()">
+  <div class="alert" *ngIf="auth.error$ | async as error">
+    {{ error }}
+  </div>
+
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="input">
+      <input formControlName="name" type="name" placeholder="Name" />
+      <div
+        class="validation"
+        *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+      >
+        <small *ngIf="form.get('name')?.errors?.required"
+          >Field must not be empty</small
+        >
+      </div>
+    </div>
+
     <div class="input">
       <input formControlName="email" type="email" placeholder="Email" />
       <div
@@ -9,10 +25,10 @@
         *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
       >
         <small *ngIf="form.get('email')?.errors?.required"
-          >Поле не должно быть пустым</small
+          >Field must not be empty</small
         >
         <small *ngIf="form.get('email')?.errors?.email"
-          >Поле должно быть email</small
+          >Field must be email</small
         >
       </div>
     </div>
@@ -28,28 +44,26 @@
         *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
       >
         <small *ngIf="form.get('password')?.errors?.required"
-          >Поле не должно быть пустым</small
+          >Field must not be empty</small
         >
         <small *ngIf="form.get('password')?.errors?.minlength"
-          >Пароль должен быть не менее
-          {{ form.get("password")?.errors?.minlength.requiredLength }} символов
-          сейчас он
-          {{
-            form.get("password")?.errors?.minlength.actualLength
-          }}
-          символа</small
+          >Password must be at least
+          {{ form.get("password")?.errors?.minlength.requiredLength }}
+          characters now it is
+          {{ form.get("password")?.errors?.minlength.actualLength }}
+          characters</small
         >
       </div>
     </div>
 
-    <a routerLink="/register"> <p>Don't have account? Register</p></a>
+    <a routerLink="/login"> <p>Already have account? Login</p></a>
     <button
       type="submit"
       [disabled]="!form.valid"
       mat-raised-button
       color="primary"
     >
-      Login
+      Register
     </button>
   </form>
 </div>

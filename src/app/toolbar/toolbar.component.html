@@ -1,21 +1,18 @@
 <mat-toolbar class="toolbar">
   <button
     mat-icon-button
-    [mat-menu-trigger-for]="menu"
-    class="icon"
-    aria-label="icon-button with menu icon"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button (click)="openDialog()" mat-menu-item>Add column</button>
-  </mat-menu>
-  <button
-    mat-icon-button
     class="icon"
     aria-label="Example icon-button with share icon"
   >
     <mat-icon>share</mat-icon>
   </button>
+  <button
+    mat-raised-button
+    aria-label="add column"
+    color="primary"
+    (click)="openDialog()"
+  >
+    Add column
+  </button>
+  
 </mat-toolbar>
-<hr>

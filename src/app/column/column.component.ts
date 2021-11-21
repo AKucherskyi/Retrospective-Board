@@ -37,9 +37,9 @@ export class ColumnComponent implements OnInit {
   }
 
   clearColumn() {
-    for (let i = 0; i < this.column.posts.length; i++) {
-      this.deletePost(i)
-    }
+    this.postService.clearColumn(this.column.id).subscribe(() => {
+      this.column.posts = []
+    })
   }
 
 
@@ -53,6 +53,7 @@ export class ColumnComponent implements OnInit {
     this.postService.createPost(post, this.column.id, this.column.posts.length).subscribe(() => {
       this.form.reset() 
       this.column.posts.unshift(post)
+    }, (error) => {console.log('[CREATE POST]:', error);
     })
   }
 
@@ -63,7 +64,7 @@ export class ColumnComponent implements OnInit {
   }
 
   addLike([postId, likes]: [number, number]) {
-    this.postService.addLike(postId, this.column.id, likes).subscribe((result) => {
+    this.postService.addLike(postId, this.column.id, likes).subscribe(() => {
     })
   }
 

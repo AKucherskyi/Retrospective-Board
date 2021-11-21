@@ -24,8 +24,8 @@ export class HeaderComponent implements OnInit {
       this.name = name
     })
 
-    if (localStorage.getItem('email')) {
-      this.name = localStorage.getItem('email')
+    if (localStorage.getItem('username')) {
+      this.name = localStorage.getItem('username')
     }
 
     this.route.queryParams.subscribe((params: Params) => {

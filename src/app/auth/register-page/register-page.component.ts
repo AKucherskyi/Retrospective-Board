@@ -13,10 +13,11 @@ export class RegisterPageComponent implements OnInit {
 
   form!: FormGroup
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
+      name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
@@ -28,12 +29,11 @@ export class RegisterPageComponent implements OnInit {
 
     const user: User = {
       email: this.form.value.email,
-      password: this.form.value.password
+      password: this.form.value.password,
+      username: this.form.value.name,
     }
 
     this.auth.register(user).subscribe(() => {
-      localStorage.setItem('email', user.email)
-      this.auth.username$.next(user.email)
       this.form.reset()
       this.router.navigate(['/board'])
     })

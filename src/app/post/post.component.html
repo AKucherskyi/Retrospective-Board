@@ -1,5 +1,5 @@
-<mat-card cdkDrag [@leaveAnimation]>
-  <mat-card-content>{{ post.text }}</mat-card-content>
+<mat-card cdkDrag>
+  <mat-card-title>{{ post.text }}</mat-card-title>
   <button
     mat-icon-button
     [mat-menu-trigger-for]="menu"
@@ -16,6 +16,26 @@
       <mat-icon [ngClass]="{ black: !liked }">thumb_up_off_alt</mat-icon>
       {{ post.likes }}
     </button>
-    <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon> 0</button>
+    <button mat-icon-button (click)="showTextarea = !showTextarea">
+      <mat-icon>chat_bubble_outline</mat-icon> 0
+    </button>
   </mat-card-actions>
+
+  <div *ngIf="showTextarea">
+    <form class="form" [formGroup]="form">
+      <textarea
+        rows="3"
+        formControlName="text"
+        placeholder="Leave your comment"
+        class="textarea"
+      ></textarea>
+
+      <button mat-icon-button color="error" class="button_discard">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" class="button_confirm">
+        <mat-icon>done</mat-icon>
+      </button>
+    </form>
+  </div>
 </mat-card>

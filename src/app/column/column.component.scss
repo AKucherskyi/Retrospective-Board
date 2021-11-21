@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+
 .list {
   min-height: 60px;
   min-width: 200px;
@@ -50,7 +51,13 @@
 .button_confirm {
   position:absolute;
   bottom: 18px;
-  right: 16px;
+  right: 13px;
+}
+
+.button_discard {
+  position:absolute;
+  bottom: 18px;
+  right: 38px;
 }
 
 .cdk-drag-preview {

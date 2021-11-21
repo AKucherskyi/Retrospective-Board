@@ -5,7 +5,7 @@
     {{ error }}
   </div>
 
-  <form class="form" [formGroup]="form" (submit)="submit()">
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()">
     <div class="input">
       <input formControlName="email" type="email" placeholder="Email" />
       <div
@@ -13,10 +13,10 @@
         *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
       >
         <small *ngIf="form.get('email')?.errors?.required"
-          >Поле не должно быть пустым</small
+          >Field must not be empty</small
         >
         <small *ngIf="form.get('email')?.errors?.email"
-          >Поле должно быть email</small
+          >Field must be email</small
         >
       </div>
     </div>
@@ -32,16 +32,7 @@
         *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
       >
         <small *ngIf="form.get('password')?.errors?.required"
-          >Поле не должно быть пустым</small
-        >
-        <small *ngIf="form.get('password')?.errors?.minlength"
-          >Пароль должен быть не менее
-          {{ form.get("password")?.errors?.minlength.requiredLength }} символов
-          сейчас он
-          {{
-            form.get("password")?.errors?.minlength.actualLength
-          }}
-          символа</small
+          >Field must not be empty</small
         >
       </div>
     </div>
@@ -49,7 +40,7 @@
     <a routerLink="/register"> <p>Don't have account? Register</p></a>
     <button
       type="submit"
-      [disabled]="!form.valid"
+      [disabled]="form.invalid"
       mat-raised-button
       color="primary"
     >

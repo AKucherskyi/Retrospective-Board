@@ -1,11 +1,11 @@
 
-
-spacer {
-    flex: 1 1 auto;
-  }
-
   .toolbar {
     background-color: #eee2dc;
       color: #123c69;
       box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+      border-bottom: 1px solid rgb(126, 126, 126);
+      display: flex;
+      justify-content: space-between;
   }
+
+

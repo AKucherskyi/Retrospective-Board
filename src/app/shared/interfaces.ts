@@ -18,9 +18,11 @@ export interface User {
     password: string
     name?: string
     returnSecureToken?: boolean
+    username?: string
 }
 
 export interface FbAuthResponse {
     idToken: string
     expiresIn: string
+    displayName?: string
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { SnackBarService } from './../shared/snack-bars/snack-bar.service';
 import { PostService } from '../shared/post.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,8 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private postService: PostService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {}
@@ -23,6 +25,9 @@ export class ToolbarComponent implements OnInit {
   openDialog(): void {
     if (this.postService.numberOfColumns >= 5) {
       this.snackBarService.openSnackBar('COLUMNS');
+      return;
+    } else if (!this.auth.isAuthenticated()) {
+      this.snackBarService.openSnackBar('AUTH');
       return;
     } else {
       const dialogRef = this.dialog.open(CreateColumnComponent, {
