@@ -32,7 +32,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     });
 
     this.cSub = this.postService.invokeColumnCreation$.subscribe((column) => {
-      console.log(column);
       this.createColumn(column);
     });
 

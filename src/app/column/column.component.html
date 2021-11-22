@@ -55,6 +55,7 @@
       *ngFor="let post of column.posts; let id = index"
       [post]="post"
       [id]="id"
+      [columnId]="column.id"
       (onLike)="addLike($event)"
       (onDel)="deletePost($event)"
     ></app-post>

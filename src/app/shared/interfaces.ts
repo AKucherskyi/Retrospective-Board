@@ -7,6 +7,12 @@ export interface Column {
 export interface Post {
     text: string
     likes?: number
+    comments?: Comment[]
+}
+
+export interface Comment {
+    text: string
+    author?: string
 }
 
 export interface ColumnsObj {

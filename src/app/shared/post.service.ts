@@ -1,5 +1,5 @@
 import { environment } from './../../environments/environment';
-import { Column, ColumnsObj, Post } from './interfaces';
+import { Column, ColumnsObj, Post, Comment } from './interfaces';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { tap, map, delay } from 'rxjs/operators';
@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PostService {
   numberOfColumns!: number;
-
   invokeColumnCreation$: Subject<any> = new Subject();
   loading$ = new BehaviorSubject(false);
 
@@ -19,6 +18,7 @@ export class PostService {
   createColumn(name: string) {
     this.loading$.next(true);
     const column = { name, posts: [] };
+
     return this.http
       .post<Column>(`${environment.fbDbUrl}/columns.json`, column)
       .pipe(
@@ -35,11 +35,13 @@ export class PostService {
 
   getColumns(): Observable<Column[]> {
     this.loading$.next(true);
+
     return this.http.get(`${environment.fbDbUrl}/columns.json`).pipe(
       map((response: { [key: string]: any }) => {
         if (!response) {
           return [];
         }
+
         return Object.keys(response).map((key) => ({
           ...response[key],
           id: key,
@@ -95,6 +97,13 @@ export class PostService {
     return this.http.patch(
       `${environment.fbDbUrl}/columns/${columnId}/posts/${postId}.json`,
       { likes }
+    );
+  }
+
+  addComment(postId: number, columnId: string, length: number, comment: Comment): Observable<any> {
+    return this.http.put(
+      `${environment.fbDbUrl}/columns/${columnId}/posts/${postId}/comments/${length}.json`,
+      { author: comment.author, text: comment.text }
     );
   }
 

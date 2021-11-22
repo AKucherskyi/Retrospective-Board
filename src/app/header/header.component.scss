@@ -1,39 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Outfit&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Outfit&display=swap");
+
 .header {
-    background-color: #edc7b7;
-    color: #474747;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 10px;
-    
+  background-color: #edc7b7;
+  color: #474747;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
 }
 
 a {
-    text-decoration: none;
-    
+  text-decoration: none;
 }
 
 .title {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 700;
-    margin: 0;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  margin: 0;
 }
 
 .header img {
-    height: 34px;
-    display: block;
+  height: 34px;
+  display: block;
+  margin-left: -4px;
 }
 
 .logo {
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .account {
-    font-size: 35px;
-    margin-bottom: 12px;
+  font-size: 35px;
+  margin-bottom: 12px;
 }
 
 .mat-menu-content {
-    width: 300px;
+  width: 300px;
 }

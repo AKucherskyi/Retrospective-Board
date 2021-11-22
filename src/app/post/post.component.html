@@ -9,33 +9,43 @@
     <mat-icon class="grey">more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button (click)="deletePost()" mat-menu-item>Delete post</button>
+    <button (click)="deletePost()" mat-menu-item><mat-icon>delete</mat-icon>Delete post</button>
   </mat-menu>
   <mat-card-actions align="end">
     <button mat-icon-button (click)="addLike()">
       <mat-icon [ngClass]="{ black: !liked }">thumb_up_off_alt</mat-icon>
       {{ post.likes }}
     </button>
-    <button mat-icon-button (click)="showTextarea = !showTextarea">
-      <mat-icon>chat_bubble_outline</mat-icon> 0
+    <button mat-icon-button (click)="showComments = !showComments">
+      <mat-icon [ngClass]="{ black: post.comments?.length == 0 }">chat_bubble_outline</mat-icon> {{post.comments?.length}}
     </button>
   </mat-card-actions>
 
-  <div *ngIf="showTextarea">
-    <form class="form" [formGroup]="form">
+ 
+
+  <div *ngIf="showComments">
+    <form class="form" [formGroup]="form" (ngSubmit)="submitComment()">
       <textarea
         rows="3"
         formControlName="text"
         placeholder="Leave your comment"
         class="textarea"
       ></textarea>
-
       <button mat-icon-button color="error" class="button_discard">
         <mat-icon>close</mat-icon>
       </button>
-      <button mat-icon-button color="primary" class="button_confirm">
+      <button mat-icon-button color="primary" class="button_confirm" [disabled]="!this.form.valid">
         <mat-icon>done</mat-icon>
       </button>
     </form>
+
+    <div class="comments">
+      <div *ngFor="let comment of post.comments">
+        <p>{{comment.text}} <small>{{comment.author}}</small></p>
+        
+      </div>
+  </div>
+    
+
   </div>
 </mat-card>

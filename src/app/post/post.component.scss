@@ -37,21 +37,27 @@
 
 .mat-card-actions {
   padding: 0;
+  margin-bottom: 0;
+  button {
+    margin-right: 6px;
+  }
 }
 
  .black {
    color: rgb(58, 58, 58);
  }
 
- .mat-icon-button{
-     margin-right: 6px;
-     
+
+
+ .form {
+   position: relative;
  }
 
  .textarea {
    background-color: #ececec;
-   width: 100%;
-   color: rgb(46, 46, 46);
+   width: 99%;
+   color: rgb(94, 94, 94);
+   padding: 5px 0 0 5px;
  }
 
  .textarea:focus {
@@ -68,13 +74,17 @@
 
  .button_confirm {
   position:absolute;
-  bottom: 18px;
-  right: 13px;
+  bottom: 0;
+  right: -5px;
+ 
 }
 
 .button_discard {
   position:absolute;
-  bottom: 18px;
-  right: 38px;
+  bottom: 0;
+  right: 20px;
 }
 
+.comments {
+  word-wrap: break-word;
+}
