@@ -15,12 +15,17 @@ export class PostComponent implements OnInit {
   liked: boolean = false;
   showComments: boolean = false;
   form!: FormGroup;
-
+  
+  @Input() color!: string;
   @Input() columnId!: string;
   @Input() post!: Post;
   @Input() id!: number;
   @Output() onLike: EventEmitter<[number, number]> = new EventEmitter();
   @Output() onDel: EventEmitter<number> = new EventEmitter();
+
+  // get color(): string {
+  //   return this.postService.getColumnColor(this.columnId)
+  // } 
 
   constructor(
     private auth: AuthService,

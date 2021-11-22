@@ -1,9 +1,9 @@
+import { ColorService } from './../shared/color.service';
 import { Animations } from './../shared/animations';
 import { PostService } from './../shared/post.service';
 import { Column, Post } from './../shared/interfaces';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
@@ -18,22 +18,26 @@ export class ColumnComponent implements OnInit {
   showTextarea: boolean = false
   newPostText: string = ''
   form!: FormGroup
+  color!: string
 
   @Input() column!: Column;
   @Output() onDel: EventEmitter<string> = new EventEmitter()
   @Output() onDrop: EventEmitter<string> = new EventEmitter()
 
-  constructor (private postService: PostService) {}
+  constructor (private postService: PostService, private colorService: ColorService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
       text: new FormControl('', Validators.required)
     })
+
+    this.color = this.colorService.getColor(this.column.id)
   }
 
 
   deleteColumn() {
     this.onDel.emit(this.column.id)
+    this.colorService.deleteColumn(this.column.id)
   }
 
   clearColumn() {

@@ -19,11 +19,27 @@
   
  .mat-card {
     cursor: grab;
-    background: #ac3b61;
+    // background: #ac3b61;
     color: rgb(230, 230, 230);
     position: relative;
     margin-top: 20px;
  }
+
+ .purple {
+  background: #802bb1;
+ }
+ .blue {
+  background: #4056a1;
+ }
+ .green {
+  background: #116466;
+ }
+ .red {
+  background: #ac3b61;
+ }
+.yellow {
+  background: #d79922;
+}
 
  .mat-card-title {
      font-size: 14px;

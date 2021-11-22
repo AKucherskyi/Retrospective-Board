@@ -1,8 +1,9 @@
+
 import { environment } from './../../environments/environment';
 import { Column, ColumnsObj, Post, Comment } from './interfaces';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { tap, map, delay } from 'rxjs/operators';
+import { tap, map} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class PostService {
   numberOfColumns!: number;
   invokeColumnCreation$: Subject<any> = new Subject();
   loading$ = new BehaviorSubject(false);
+
 
   constructor(private http: HttpClient) {}
 
@@ -84,6 +86,7 @@ export class PostService {
       `${environment.fbDbUrl}/columns/${id}/posts.json`
     );
   }
+
 
   createPost(post: Post, columnId: string, length: number): Observable<Post> {
     post.likes = 0;
