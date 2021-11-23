@@ -12,18 +12,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
-  liked: boolean = false;
+  liked!: boolean;
   showComments: boolean = false;
   form!: FormGroup;
-  
+  userEmail!: string;
+
   @Input() color!: string;
   @Input() columnId!: string;
   @Input() post!: Post;
   @Input() id!: number;
-  @Output() onLike: EventEmitter<[number, number]> = new EventEmitter();
+  @Output() onLike: EventEmitter<[number, number, string]> = new EventEmitter();
   @Output() onDel: EventEmitter<number> = new EventEmitter();
 
- 
   constructor(
     private auth: AuthService,
     private snackBarService: SnackBarService,
@@ -35,8 +35,13 @@ export class PostComponent implements OnInit {
       text: new FormControl('', [Validators.required]),
     });
 
-    this.post.comments = this.post.comments || []
+    this.post.comments = this.post?.comments || [];
 
+    this.userEmail = localStorage.getItem('email') as string;
+
+    this.post.likedBy = this.post.likedBy || '';
+
+    this.liked = this.post.likedBy.includes(this.userEmail);
   }
 
   deletePost() {
@@ -47,29 +52,47 @@ export class PostComponent implements OnInit {
     const comment: Comment = {
       author: localStorage.getItem('username') as string,
       text: this.form.value.text,
-      date: new Date()
+      date: new Date(),
     };
 
-    let length = this.post.comments ? this.post.comments.length : 0
+    let length = this.post.comments ? this.post.comments.length : 0;
 
     this.postService
       .addComment(this.id, this.columnId, length, comment)
       .subscribe(() => {
-        this.form.reset()
-        this.post.comments?.push(comment)
+        this.form.reset();
+        this.post.comments?.push(comment);
       });
   }
 
+  deleteComment(idx: number) {
+    this.postService
+    .deleteComment(this.id, this.columnId, idx)
+    .subscribe(() => {
+      this.post.comments?.splice(idx, 1);
+    });
+  }
+
   addLike() {
-    if (this.post.likes !== undefined && this.auth.isAuthenticated()) {
+    if (
+      this.post.likes !== undefined &&
+      this.auth.isAuthenticated() &&
+      this.post.likedBy !== undefined
+    ) {
+
       if (this.liked) {
         this.post.likes--;
         this.liked = !this.liked;
+        this.post.likedBy = this.post.likedBy
+          .replace(this.userEmail, '')
+          .trim();
       } else {
         this.post.likes++;
         this.liked = !this.liked;
+        this.post.likedBy += ' ' + this.userEmail;
       }
-      this.onLike.emit([this.id, this.post.likes]);
+
+      this.onLike.emit([this.id, this.post.likes, this.post.likedBy]);
     } else {
       this.snackBarService.openSnackBar('AUTH');
     }

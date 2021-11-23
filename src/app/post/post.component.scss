@@ -19,10 +19,10 @@
   
  .mat-card {
     cursor: grab;
-    // background: #ac3b61;
     color: rgb(230, 230, 230);
     position: relative;
     margin-top: 20px;
+    padding: 12px;
  }
 
  .purple {
@@ -42,7 +42,7 @@
 }
 
  .mat-card-title {
-  font-size: 14px;
+  font-size: 15px;
    margin: 0;
    padding: 0 20px 0 5px;
    word-wrap: break-word;
@@ -62,7 +62,7 @@
 
  .form {
    position: relative;
-   margin: 10px 0;
+   margin-top: 6px;
  }
 
  .textarea {
@@ -88,22 +88,22 @@
  .button_confirm {
   position:absolute;
   bottom: 0;
-  right: -5px;
+  right: 0;
  
 }
 
 .button_discard {
   position:absolute;
   bottom: 0;
-  right: 20px;
+  right: 25px;
 }
 
 .comments {
   word-wrap: break-word;
-  font-size: 12px;
+  font-size: 13px;
   
   &>div {
-    margin: 10px 0;
+    margin-top: 10px;
   }
 
   p{

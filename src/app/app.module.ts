@@ -1,4 +1,3 @@
-
 import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MomentModule } from 'ngx-moment';
@@ -46,7 +45,6 @@ const INTERCEPROR_PROVIDER: Provider = {
     SharedModule,
     HttpClientModule,
     MomentModule
-
   ],
   providers: [INTERCEPROR_PROVIDER],
   bootstrap: [AppComponent]

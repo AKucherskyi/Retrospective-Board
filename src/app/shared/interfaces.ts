@@ -8,6 +8,7 @@ export interface Post {
     text: string
     likes?: number
     comments?: Comment[]
+    likedBy?: string
 }
 
 export interface Comment {

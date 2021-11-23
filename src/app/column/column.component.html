@@ -26,10 +26,11 @@
         <textarea rows="3" matInput formControlName="text"></textarea>
       </mat-form-field>
       <button
+        type="button"
         mat-icon-button
         color="error"
         class="button_discard"
-        (click)="showTextarea = !showTextarea"
+        (click)="showTextarea = !showTextarea; form.reset()"
       >
         <mat-icon>close</mat-icon>
       </button>

@@ -54,13 +54,13 @@
     </form>
 
     <div class="comments">
-      <div *ngFor="let comment of post.comments">
+      <div *ngFor="let comment of post.comments; let idx = index">
         <p>
           {{ comment.text }}
         </p>
         <div class="author">
           <small>{{ comment.date | amTimeAgo }}  by {{ comment.author }}</small>
-          <mat-icon>delete</mat-icon>
+          <mat-icon (click)="deleteComment(idx)">delete</mat-icon>
         </div>
       </div>
     </div>

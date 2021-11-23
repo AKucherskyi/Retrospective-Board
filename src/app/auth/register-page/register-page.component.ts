@@ -7,36 +7,38 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  styleUrls: ['./register-page.component.scss'],
 })
 export class RegisterPageComponent implements OnInit {
+  form!: FormGroup;
 
-  form!: FormGroup
-
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
-    })
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    });
   }
+
   submit() {
     if (this.form.invalid) {
-      return
+      return;
     }
 
     const user: User = {
       email: this.form.value.email,
       password: this.form.value.password,
       username: this.form.value.name,
-    }
+    };
 
     this.auth.register(user).subscribe(() => {
-      this.form.reset()
-      this.router.navigate(['/board'])
-    })
-
+      this.form.reset();
+      this.router.navigate(['/board']);
+    });
   }
 }

@@ -10,15 +10,12 @@ import { User } from '../shared/interfaces';
   providedIn: 'root',
 })
 export class AuthService {
-
   public error$: Subject<string> = new Subject<string>();
   public username$: BehaviorSubject<string> = new BehaviorSubject<string>(
     'Anonymous'
   );
 
-
   constructor(private http: HttpClient) {}
-
 
   get token(): string | null {
     const expDate = new Date(<string>localStorage.getItem('fb-token-exp'));
@@ -29,7 +26,6 @@ export class AuthService {
     return localStorage.getItem('fb-token');
   }
 
-
   login(user: User): Observable<any> {
     user.returnSecureToken = true;
     return this.http
@@ -39,16 +35,21 @@ export class AuthService {
       )
       .pipe(
         tap((response) => {
-          this.getUsername(response as FbAuthResponse).subscribe((response: any) => {
-            this.username$.next(response.users[0].displayName);
-            localStorage.setItem('username', response.users[0].displayName as string)
-          })
+          this.getUsername(response as FbAuthResponse).subscribe(
+            (response: any) => {
+              this.username$.next(response.users[0].displayName);
+              localStorage.setItem(
+                'username',
+                response.users[0].displayName as string
+              );
+            }
+          );
           this.setToken(response as FbAuthResponse);
+          localStorage.setItem('email', user.email as string);
         }),
         catchError(this.handleError.bind(this))
       );
   }
-
 
   register(user: User): Observable<any> {
     user.returnSecureToken = true;
@@ -59,26 +60,27 @@ export class AuthService {
       )
       .pipe(
         tap((response) => {
-          this.setUsername(response as FbAuthResponse, user.username as string).subscribe(() => {
-            this.username$.next(user.username as string)
-            localStorage.setItem('username', user.username as string)
-          })
+          this.setUsername(
+            response as FbAuthResponse,
+            user.username as string
+          ).subscribe(() => {
+            this.username$.next(user.username as string);
+            localStorage.setItem('username', user.username as string);
+          });
           this.setToken(response as FbAuthResponse);
+          localStorage.setItem('email', user.email as string);
         }),
         catchError(this.handleError.bind(this))
       );
   }
 
-
   logout() {
     this.setToken(null);
   }
 
-
   isAuthenticated() {
     return !!this.token;
   }
-
 
   private setToken(response: FbAuthResponse | null) {
     if (response) {
@@ -93,16 +95,18 @@ export class AuthService {
   }
 
   private getUsername(response: FbAuthResponse) {
-    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${environment.apiKey}`,
-    {idToken: response.idToken})
+    return this.http.post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${environment.apiKey}`,
+      { idToken: response.idToken }
+    );
   }
-
 
   private setUsername(response: FbAuthResponse, username: string) {
-    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
-    {idToken: response.idToken, displayName: username})
+    return this.http.post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
+      { idToken: response.idToken, displayName: username }
+    );
   }
-  
 
   private handleError(error: HttpErrorResponse) {
     const { message } = error.error.error;

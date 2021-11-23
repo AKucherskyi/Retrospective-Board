@@ -67,8 +67,8 @@ export class ColumnComponent implements OnInit {
     }) 
   }
 
-  addLike([postId, likes]: [number, number]) {
-    this.postService.addLike(postId, this.column.id, likes).subscribe(() => {
+  addLike([postId, likes, likedBy]: [number, number, string]) {
+    this.postService.addLike(postId, this.column.id, likes, likedBy).subscribe(() => {
     })
   }
 

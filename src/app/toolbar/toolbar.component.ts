@@ -1,3 +1,4 @@
+import { Column } from './../shared/interfaces';
 import { AuthService } from './../auth/auth.service';
 import { SnackBarService } from './../shared/snack-bars/snack-bar.service';
 import { PostService } from '../shared/post.service';
@@ -5,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateColumnComponent } from '../column/create-column/create-column.component';
 import * as XLSX from 'xlsx';
-import { Column } from '../shared/interfaces';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -46,6 +47,17 @@ export class ToolbarComponent implements OnInit {
         }
       });
     }
+  }
+
+  longestColumn(): Column | null {
+    if (!this.columns) {
+      return null
+    }
+    let longestColumn = this.columns[0]
+    for (let column of this.columns) {
+      longestColumn = column.posts.length > longestColumn.posts.length ? column : longestColumn
+    }
+    return longestColumn
   }
 
   exportexcel(): void {

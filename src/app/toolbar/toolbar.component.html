@@ -28,6 +28,12 @@
 
 <table id="excel-table">
   <tr>
+    <th>Name</th>
     <th *ngFor="let column of columns">{{column.name}}</th>
+  </tr>
+
+  <tr *ngFor="let post of longestColumn()?.posts; let idx = index">
+    <td>Post {{idx + 1}}</td>
+    <td *ngFor="let column of columns">{{ column.posts[idx]?.text}}</td>
   </tr>
 </table>
