@@ -42,10 +42,7 @@
 }
 
  .mat-card-title {
-     font-size: 14px;
- }
-
- .mat-card-title {
+  font-size: 14px;
    margin: 0;
    padding: 0 20px 0 5px;
    word-wrap: break-word;
@@ -63,10 +60,9 @@
    color: rgb(58, 58, 58);
  }
 
-
-
  .form {
    position: relative;
+   margin: 10px 0;
  }
 
  .textarea {
@@ -74,6 +70,7 @@
    width: 99%;
    color: rgb(94, 94, 94);
    padding: 5px 0 0 5px;
+   font-family: Arial, Helvetica, sans-serif;
  }
 
  .textarea:focus {
@@ -103,4 +100,26 @@
 
 .comments {
   word-wrap: break-word;
+  font-size: 12px;
+  
+  &>div {
+    margin: 10px 0;
+  }
+
+  p{
+    margin-bottom: 0;
+  }
+}
+
+.author {
+  color: rgba(230, 230, 230, 0.486);
+  display: flex;
+  justify-content: space-between;
+
+  .mat-icon {
+    cursor: pointer;
+    position: relative;
+    bottom: 5px;
+    font-size: 20px;
+  }
 }

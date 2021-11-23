@@ -3,11 +3,13 @@
   padding: 10px;
   color: #123c69;
   box-sizing: border-box;
+  min-width: 250px;
+  max-width: 100%;
 }
-
 
 .list {
   min-height: 60px;
+
   border-radius: 4px;
   overflow: hidden;
   display: block;
@@ -16,13 +18,23 @@
 .title {
   display: flex;
   justify-content: space-between;
+
+  h2 {
+    margin-bottom: 0;
+    word-wrap: break-word;
+    max-width: 95%;
+  }
+
+  button {
+    position: relative;
+    bottom: 6px;
+  }
 }
 
 .textarea {
   margin-top: 20px;
   padding-bottom: 0;
 }
-
 
 .grey {
   color: #999;
@@ -31,9 +43,8 @@
 .form {
   min-width: 150px;
   width: 100%;
-  position: relative;;
+  position: relative;
 }
-
 
 .example-full-width {
   width: 100%;
@@ -42,19 +53,18 @@
 .button_add {
   width: 100%;
   color: #8c8c9e;
-  background: rgba(94,94,113,0.08);
+  background: rgba(94, 94, 113, 0.08);
   padding: 0;
 }
 
-
 .button_confirm {
-  position:absolute;
+  position: absolute;
   bottom: 18px;
   right: 13px;
 }
 
 .button_discard {
-  position:absolute;
+  position: absolute;
   bottom: 18px;
   right: 38px;
 }

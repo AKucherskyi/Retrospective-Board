@@ -1,9 +1,10 @@
 <mat-toolbar class="toolbar">
   <button
-    mat-icon-button
+    mat-stroked-button
     class="icon"
     aria-label="Example icon-button with share icon"
   >
+    Share
     <mat-icon>share</mat-icon>
   </button>
   <button
@@ -14,5 +15,19 @@
   >
     Add column
   </button>
-  
+
+  <button
+    mat-flat-button
+    style="background-color: #bab2b5"
+    (click)="exportexcel()"
+  >
+    Export
+    <mat-icon> cloud_download</mat-icon>
+  </button>
 </mat-toolbar>
+
+<table id="excel-table">
+  <tr>
+    <th *ngFor="let column of columns">{{column.name}}</th>
+  </tr>
+</table>

@@ -23,10 +23,7 @@ export class PostComponent implements OnInit {
   @Output() onLike: EventEmitter<[number, number]> = new EventEmitter();
   @Output() onDel: EventEmitter<number> = new EventEmitter();
 
-  // get color(): string {
-  //   return this.postService.getColumnColor(this.columnId)
-  // } 
-
+ 
   constructor(
     private auth: AuthService,
     private snackBarService: SnackBarService,
@@ -49,14 +46,15 @@ export class PostComponent implements OnInit {
   submitComment() {
     const comment: Comment = {
       author: localStorage.getItem('username') as string,
-      text: this.form.value.text
+      text: this.form.value.text,
+      date: new Date()
     };
 
     let length = this.post.comments ? this.post.comments.length : 0
 
     this.postService
       .addComment(this.id, this.columnId, length, comment)
-      .subscribe((response) => {
+      .subscribe(() => {
         this.form.reset()
         this.post.comments?.push(comment)
       });

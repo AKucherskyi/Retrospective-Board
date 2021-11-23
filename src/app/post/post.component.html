@@ -9,7 +9,9 @@
     <mat-icon class="grey">more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button (click)="deletePost()" mat-menu-item><mat-icon>delete</mat-icon>Delete post</button>
+    <button (click)="deletePost()" mat-menu-item>
+      <mat-icon>delete</mat-icon>Delete post
+    </button>
   </mat-menu>
   <mat-card-actions align="end">
     <button mat-icon-button (click)="addLike()">
@@ -17,11 +19,12 @@
       {{ post.likes }}
     </button>
     <button mat-icon-button (click)="showComments = !showComments">
-      <mat-icon [ngClass]="{ black: post.comments?.length == 0 }">chat_bubble_outline</mat-icon> {{post.comments?.length}}
+      <mat-icon [ngClass]="{ black: post.comments?.length == 0 }"
+        >chat_bubble_outline</mat-icon
+      >
+      {{ post.comments?.length }}
     </button>
   </mat-card-actions>
-
- 
 
   <div *ngIf="showComments">
     <form class="form" [formGroup]="form" (ngSubmit)="submitComment()">
@@ -31,21 +34,35 @@
         placeholder="Leave your comment"
         class="textarea"
       ></textarea>
-      <button mat-icon-button color="error" class="button_discard">
+      <button
+        type="button"
+        mat-icon-button
+        color="error"
+        class="button_discard"
+        (click)="form.reset(); showComments = !showComments"
+      >
         <mat-icon>close</mat-icon>
       </button>
-      <button mat-icon-button color="primary" class="button_confirm" [disabled]="!this.form.valid">
+      <button
+        mat-icon-button
+        color="primary"
+        class="button_confirm"
+        [disabled]="!this.form.valid"
+      >
         <mat-icon>done</mat-icon>
       </button>
     </form>
 
     <div class="comments">
       <div *ngFor="let comment of post.comments">
-        <p>{{comment.text}} <small>{{comment.author}}</small></p>
-        
+        <p>
+          {{ comment.text }}
+        </p>
+        <div class="author">
+          <small>{{ comment.date | amTimeAgo }}  by {{ comment.author }}</small>
+          <mat-icon>delete</mat-icon>
+        </div>
       </div>
-  </div>
-    
-
+    </div>
   </div>
 </mat-card>

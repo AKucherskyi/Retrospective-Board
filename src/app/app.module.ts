@@ -1,7 +1,7 @@
 
 import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MomentModule } from 'ngx-moment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardPageComponent } from './board-page/board-page.component';
@@ -44,7 +44,8 @@ const INTERCEPROR_PROVIDER: Provider = {
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    MomentModule
 
   ],
   providers: [INTERCEPROR_PROVIDER],

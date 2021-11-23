@@ -13,6 +13,7 @@ export interface Post {
 export interface Comment {
     text: string
     author?: string
+    date: Date
 }
 
 export interface ColumnsObj {

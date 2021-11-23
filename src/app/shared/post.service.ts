@@ -106,7 +106,7 @@ export class PostService {
   addComment(postId: number, columnId: string, length: number, comment: Comment): Observable<any> {
     return this.http.put(
       `${environment.fbDbUrl}/columns/${columnId}/posts/${postId}/comments/${length}.json`,
-      { author: comment.author, text: comment.text }
+      { author: comment.author, text: comment.text, date: comment.date.toString() }
     );
   }
 
