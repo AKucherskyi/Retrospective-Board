@@ -1,3 +1,4 @@
+import { ShareComponent } from './share/share.component';
 import { Column } from './../shared/interfaces';
 import { AuthService } from './../auth/auth.service';
 import { SnackBarService } from './../shared/snack-bars/snack-bar.service';
@@ -7,7 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateColumnComponent } from '../column/create-column/create-column.component';
 import * as XLSX from 'xlsx';
 
-
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -15,7 +15,7 @@ import * as XLSX from 'xlsx';
 })
 export class ToolbarComponent implements OnInit {
   name!: string;
-  @Input() columns!: Column[]
+  @Input() columns!: Column[];
 
   constructor(
     public dialog: MatDialog,
@@ -24,10 +24,23 @@ export class ToolbarComponent implements OnInit {
     private auth: AuthService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  get longestColumn(): Column | null {
+    if (!this.columns) {
+      return null;
+    }
+    let longestColumn = this.columns[0];
+    for (let column of this.columns) {
+      longestColumn =
+        column.posts.length > longestColumn.posts.length
+          ? column
+          : longestColumn;
+    }
+    return longestColumn;
   }
 
-  openDialog(): void {
+  openDialogColumns(): void {
     if (this.postService.numberOfColumns >= 5) {
       this.snackBarService.openSnackBar('COLUMNS');
       return;
@@ -49,23 +62,16 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  longestColumn(): Column | null {
-    if (!this.columns) {
-      return null
-    }
-    let longestColumn = this.columns[0]
-    for (let column of this.columns) {
-      longestColumn = column.posts.length > longestColumn.posts.length ? column : longestColumn
-    }
-    return longestColumn
+  openDialogShare(): void {
+    const dialogRef = this.dialog.open(ShareComponent, {
+      width: '350px', autoFocus: false
+    });
   }
 
   exportexcel(): void {
-    /* table id is passed over here */
     let element = document.getElementById('excel-table');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
-    /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 

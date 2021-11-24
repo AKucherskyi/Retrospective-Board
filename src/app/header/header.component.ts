@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -21,17 +20,17 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.username$.subscribe((name) => {
-      this.name = name
-    })
+      this.name = name;
+    });
 
     if (localStorage.getItem('username')) {
-      this.name = localStorage.getItem('username')
+      this.name = localStorage.getItem('username');
     }
 
     this.route.queryParams.subscribe((params: Params) => {
       if (params['authFailed']) {
-        this.snackBarService.openSnackBar('AUTH')
-        this.router.navigate(['board'])
+        this.snackBarService.openSnackBar('AUTH');
+        this.router.navigate(['board']);
       }
     });
   }
@@ -41,13 +40,12 @@ export class HeaderComponent implements OnInit {
   }
 
   register() {
-    this.router.navigate(['/register'])
+    this.router.navigate(['/register']);
   }
 
   logout() {
     this.auth.logout();
-    this.auth.username$.next('Anonymous')
+    this.auth.username$.next('Anonymous');
     this.router.navigate(['/login']);
   }
-
 }

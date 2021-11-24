@@ -59,7 +59,7 @@
           {{ comment.text }}
         </p>
         <div class="author">
-          <small>{{ comment.date | amTimeAgo }}  by {{ comment.author }}</small>
+          <small>{{ comment.date | amTimeAgo }} by {{ comment.author }}</small>
           <mat-icon (click)="deleteComment(idx)">delete</mat-icon>
         </div>
       </div>

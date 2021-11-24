@@ -14,13 +14,15 @@ import { LoaderComponent } from './loader/loader.component';
 import {MatCardModule} from '@angular/material/card';
 import { SnackBarAuthComponent } from './snack-bars/snack-bar-auth/snack-bar-auth.component';
 import { SnackBarComponent } from './snack-bars/snack-bar/snack-bar.component';
+import { SnackBarCopyComponent } from './snack-bars/snack-bar-copy/snack-bar-copy.component';
 
 
 @NgModule({
   declarations: [
     SnackBarComponent,
     LoaderComponent,
-    SnackBarAuthComponent
+    SnackBarAuthComponent,
+    SnackBarCopyComponent
   ],
   imports: [
     CommonModule,

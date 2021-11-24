@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { RegisterPageComponent } from './auth/register-page/register-page.component';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { ShareComponent } from './toolbar/share/share.component';
 
 
 const INTERCEPROR_PROVIDER: Provider = {
@@ -35,6 +36,7 @@ const INTERCEPROR_PROVIDER: Provider = {
     HeaderComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    ShareComponent,
     
   ],
   imports: [

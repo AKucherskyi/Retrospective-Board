@@ -2,7 +2,8 @@
   <button
     mat-stroked-button
     class="icon"
-    aria-label="Example icon-button with share icon"
+    aria-label="button with share icon"
+    (click)="openDialogShare()"
   >
     Share
     <mat-icon>share</mat-icon>
@@ -11,7 +12,7 @@
     mat-raised-button
     aria-label="add column"
     color="primary"
-    (click)="openDialog()"
+    (click)="openDialogColumns()"
   >
     Add column
   </button>
@@ -28,12 +29,12 @@
 
 <table id="excel-table">
   <tr>
-    <th>Name</th>
-    <th *ngFor="let column of columns">{{column.name}}</th>
+    <th>Column</th>
+    <th *ngFor="let column of columns">{{ column.name }}</th>
   </tr>
 
-  <tr *ngFor="let post of longestColumn()?.posts; let idx = index">
-    <td>Post {{idx + 1}}</td>
-    <td *ngFor="let column of columns">{{ column.posts[idx]?.text}}</td>
+  <tr *ngFor="let post of longestColumn?.posts; let idx = index">
+    <td>Post {{ idx + 1 }}</td>
+    <td *ngFor="let column of columns">{{ column.posts[idx]?.text }}</td>
   </tr>
 </table>

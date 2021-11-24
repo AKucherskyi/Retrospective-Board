@@ -1,0 +1,16 @@
+mat-dialog-container {
+  background: rgb(99, 99, 99) !important;
+}
+
+.mat-dialog-content {
+  display: flex;
+  justify-content: space-between;
+  p {
+    margin-top: 5px;
+    max-width: 70%;
+    overflow: hidden;
+    padding: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.527);
+    flex-grow: 1;
+  }
+}

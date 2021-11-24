@@ -3,26 +3,21 @@ import { PostService } from './../shared/post.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-/**
- * @title Drag&Drop connected sorting group
- */
 @Component({
   selector: 'app-board-page',
   templateUrl: 'board-page.component.html',
   styleUrls: ['board-page.component.scss'],
 })
 export class BoardPageComponent implements OnInit, OnDestroy {
-  
   columns!: Column[];
   loading!: boolean;
-  width!: string
+  width!: string;
 
-
-  cSub!: Subscription
-  rSub!: Subscription
-  uSub!: Subscription
-  dSub!: Subscription
-  lSub!: Subscription
+  cSub!: Subscription;
+  rSub!: Subscription;
+  uSub!: Subscription;
+  dSub!: Subscription;
+  lSub!: Subscription;
 
   constructor(private postService: PostService) {}
 
@@ -38,7 +33,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.lSub = this.postService.loading$.subscribe((loading: boolean) => {
       this.loading = loading;
     });
-
   }
 
   createColumn(column: Column) {
@@ -46,7 +40,9 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   updateColumns() {
-    this.uSub = this.postService.updateColumns(this.columns).subscribe(() => {});
+    this.uSub = this.postService
+      .updateColumns(this.columns)
+      .subscribe(() => {});
   }
 
   deleteColumn(id: string) {
@@ -57,19 +53,19 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.cSub) {
-      this.cSub.unsubscribe()
+      this.cSub.unsubscribe();
     }
     if (this.rSub) {
-      this.rSub.unsubscribe()
+      this.rSub.unsubscribe();
     }
     if (this.uSub) {
-      this.uSub.unsubscribe()
+      this.uSub.unsubscribe();
     }
     if (this.dSub) {
-      this.dSub.unsubscribe()
+      this.dSub.unsubscribe();
     }
     if (this.lSub) {
-      this.lSub.unsubscribe()
+      this.lSub.unsubscribe();
     }
   }
 }
