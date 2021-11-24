@@ -24,7 +24,11 @@ export class ToolbarComponent implements OnInit {
     private auth: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.postService.getName().subscribe((response: any) => {
+      this.name = response.name.toString();
+    });
+  }
 
   get longestColumn(): Column | null {
     if (!this.columns) {
@@ -63,8 +67,9 @@ export class ToolbarComponent implements OnInit {
   }
 
   openDialogShare(): void {
-    const dialogRef = this.dialog.open(ShareComponent, {
-      width: '350px', autoFocus: false
+    this.dialog.open(ShareComponent, {
+      width: '350px',
+      autoFocus: false,
     });
   }
 

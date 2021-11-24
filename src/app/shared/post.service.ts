@@ -136,4 +136,17 @@ export class PostService {
       `${environment.fbDbUrl}/columns/${columnId}/posts/${postId}/comments/${idx}.json`
     );
   }
+
+  getName() {
+    return this.http.get(`${environment.fbDbUrl}/name.json`);
+  }
+
+  changeName(newName: string, columnId?: string) {
+    if (columnId) {
+      return this.http.patch(`${environment.fbDbUrl}/columns/${columnId}.json`, { name: newName });
+    } else {
+      return this.http.patch(`${environment.fbDbUrl}/name.json`, { name: newName });
+    }
+    
+  }
 }

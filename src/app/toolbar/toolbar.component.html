@@ -1,30 +1,43 @@
 <mat-toolbar class="toolbar">
-  <button
-    mat-stroked-button
-    class="icon"
-    aria-label="button with share icon"
-    (click)="openDialogShare()"
-  >
-    Share
-    <mat-icon>share</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    aria-label="add column"
-    color="primary"
-    (click)="openDialogColumns()"
-  >
-    Add column
-  </button>
-
-  <button
-    mat-flat-button
-    style="background-color: #bab2b5"
-    (click)="exportexcel()"
-  >
-    Export
-    <mat-icon> cloud_download</mat-icon>
-  </button>
+  <h2 appContentEdit class="name">{{ name }}</h2>
+  <div>
+    <div class="buttons">
+      <button
+        mat-stroked-button
+        class="icon"
+        aria-label="button with share icon"
+        (click)="openDialogShare()"
+      >
+        Share
+        <mat-icon>share</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        aria-label="add column"
+        color="primary"
+        class="add"
+        (click)="openDialogColumns()"
+      >
+        Add column
+      </button>
+      <button mat-flat-button class="export" (click)="exportexcel()">
+        Export
+        <mat-icon>cloud_download</mat-icon>
+      </button>
+    </div>
+    <div class="menu">
+      <button mat-icon-button [mat-menu-trigger-for]="menu"><mat-icon>menu</mat-icon></button>
+      <mat-menu #menu="matMenu">
+        <button (click)="openDialogShare()" mat-menu-item>
+          <mat-icon>share</mat-icon>Share
+        </button><button (click)="openDialogColumns()" mat-menu-item>
+          <mat-icon>add</mat-icon>Add Column
+        </button><button (click)="exportexcel()" mat-menu-item>
+          <mat-icon>cloud_download</mat-icon>Export
+        </button>
+      </mat-menu>
+    </div>
+  </div>
 </mat-toolbar>
 
 <table id="excel-table">

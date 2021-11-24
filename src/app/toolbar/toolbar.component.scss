@@ -4,13 +4,50 @@
   box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
   border-bottom: 1px solid rgb(126, 126, 126);
   display: flex;
-  justify-content: flex-end;
-
+  justify-content: space-between;
   button {
     margin-left: 10px;
   }
 }
 
+.name:hover:not(:focus)::after {
+  content: ' \270E';
+}
+
+.export {
+  background-color: #bab2b5;
+  transition: background-color 200ms ease;
+  .mat-icon {
+    position: relative;
+    bottom: 3px;
+    left: 5px;
+  }
+  &:hover {
+    background-color: rgba(156, 156, 156, 0.897);
+  }
+}
+
+.add:hover {
+  background-color: rgb(5, 55, 192);
+}
+
 #excel-table {
   display: none;
+}
+
+.menu {
+  display: none;
+}
+
+[contenteditable] {
+  outline: 1px solid transparent;
+}
+
+@media  screen and (max-width: 768px) {
+  .buttons {
+    display: none;
+  }
+  .menu {
+    display: block;
+  }
 }

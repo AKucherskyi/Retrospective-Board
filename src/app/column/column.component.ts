@@ -63,9 +63,6 @@ export class ColumnComponent implements OnInit {
         () => {
           this.form.reset();
           this.column.posts.unshift(post);
-        },
-        (error) => {
-          console.log('[CREATE POST]:', error);
         }
       );
   }

@@ -15,6 +15,7 @@ import {MatCardModule} from '@angular/material/card';
 import { SnackBarAuthComponent } from './snack-bars/snack-bar-auth/snack-bar-auth.component';
 import { SnackBarComponent } from './snack-bars/snack-bar/snack-bar.component';
 import { SnackBarCopyComponent } from './snack-bars/snack-bar-copy/snack-bar-copy.component';
+import { ContentEditDirective } from './content-edit.directive';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SnackBarCopyComponent } from './snack-bars/snack-bar-copy/snack-bar-cop
     SnackBarComponent,
     LoaderComponent,
     SnackBarAuthComponent,
-    SnackBarCopyComponent
+    SnackBarCopyComponent,
+    ContentEditDirective
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { SnackBarCopyComponent } from './snack-bars/snack-bar-copy/snack-bar-cop
     MatSnackBarModule,
     MatProgressSpinnerModule,
     LoaderComponent,
-    MatCardModule
+    MatCardModule,
+    ContentEditDirective
   ]
 })
 export class SharedModule { }

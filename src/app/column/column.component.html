@@ -1,6 +1,6 @@
 <div class="container">
   <div class="title">
-    <h2> {{ column.name }}</h2>
+    <h2 appContentEdit [column]="column" class="name"> {{ column.name }}</h2>
     <button mat-icon-button [mat-menu-trigger-for]="menu" aria-label="options">
       <mat-icon class="grey">more_vert</mat-icon>
     </button>
