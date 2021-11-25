@@ -18,12 +18,11 @@ import { RegisterPageComponent } from './auth/register-page/register-page.compon
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ShareComponent } from './toolbar/share/share.component';
 
-
 const INTERCEPROR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
   multi: true,
-  useClass: AuthInterceptor
-}
+  useClass: AuthInterceptor,
+};
 
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ const INTERCEPROR_PROVIDER: Provider = {
     LoginPageComponent,
     RegisterPageComponent,
     ShareComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -46,9 +44,9 @@ const INTERCEPROR_PROVIDER: Provider = {
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
-    MomentModule
+    MomentModule,
   ],
   providers: [INTERCEPROR_PROVIDER],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

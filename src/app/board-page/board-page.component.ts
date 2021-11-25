@@ -35,17 +35,17 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  createColumn(column: Column) {
+  createColumn(column: Column): void {
     this.columns.push(column);
   }
 
-  updateColumns() {
+  updateColumns(): void {
     this.uSub = this.postService
       .updateColumns(this.columns)
       .subscribe(() => {});
   }
 
-  deleteColumn(id: string) {
+  deleteColumn(id: string): void {
     this.dSub = this.postService.deleteColumn(id).subscribe(() => {
       this.columns = this.columns.filter((column) => column.id != id);
     });

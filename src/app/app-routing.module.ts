@@ -5,15 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterPageComponent } from './auth/register-page/register-page.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/board', pathMatch: 'full'},
-  {path: 'board', component: BoardPageComponent}, 
-  {path: 'login', component: LoginPageComponent},
-  {path: 'register', component: RegisterPageComponent},
-  {path: '**', redirectTo: '/board'}
+  { path: '', redirectTo: '/board', pathMatch: 'full' },
+  { path: 'board', component: BoardPageComponent },
+  { path: 'login', component: LoginPageComponent },
+  { path: 'register', component: RegisterPageComponent },
+  { path: '**', redirectTo: '/board' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

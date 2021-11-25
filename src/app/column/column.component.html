@@ -49,6 +49,7 @@
   <div
     cdkDropList
     [cdkDropListData]="column.posts"
+    [cdkDropListEnterPredicate]="isAuthenticated"
     class="list"
     (cdkDropListDropped)="drop($event)"
   >

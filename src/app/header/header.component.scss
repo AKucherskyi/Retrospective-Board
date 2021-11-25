@@ -27,6 +27,7 @@ a {
 .logo {
   display: flex;
   align-items: center;
+  margin-left: -6px;
 }
 
 .account {
@@ -36,4 +37,10 @@ a {
 
 .mat-menu-content {
   width: 300px;
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    display: none;
+  }
 }

@@ -26,13 +26,15 @@
       </button>
     </div>
     <div class="menu">
-      <button mat-icon-button [mat-menu-trigger-for]="menu"><mat-icon>menu</mat-icon></button>
+      <button mat-icon-button [mat-menu-trigger-for]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
       <mat-menu #menu="matMenu">
         <button (click)="openDialogShare()" mat-menu-item>
-          <mat-icon>share</mat-icon>Share
-        </button><button (click)="openDialogColumns()" mat-menu-item>
-          <mat-icon>add</mat-icon>Add Column
-        </button><button (click)="exportexcel()" mat-menu-item>
+          <mat-icon>share</mat-icon>Share</button
+        ><button (click)="openDialogColumns()" mat-menu-item>
+          <mat-icon>add</mat-icon>Add Column</button
+        ><button (click)="exportexcel()" mat-menu-item>
           <mat-icon>cloud_download</mat-icon>Export
         </button>
       </mat-menu>
@@ -43,11 +45,24 @@
 <table id="excel-table">
   <tr>
     <th>Column</th>
+
     <th *ngFor="let column of columns">{{ column.name }}</th>
   </tr>
 
-  <tr *ngFor="let post of longestColumn?.posts; let idx = index">
-    <td>Post {{ idx + 1 }}</td>
-    <td *ngFor="let column of columns">{{ column.posts[idx]?.text }}</td>
-  </tr>
+  <ng-container *ngFor="let post of longestColumn?.posts; let idx = index">
+    <tr>
+      <td>Post {{ idx + 1 }}</td>
+      <td *ngFor="let column of columns">{{ column.posts[idx]?.text }}</td>
+    </tr>
+    <tr>
+      <td>Likes</td>
+      <td *ngFor="let column of columns">{{ column.posts[idx]?.likes }}</td>
+    </tr>
+    <tr>
+      <td>Comments</td>
+      <td *ngFor="let column of columns">
+        {{ parseComments(column.posts[idx]?.comments) }}
+      </td>
+    </tr>
+  </ng-container>
 </table>

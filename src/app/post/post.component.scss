@@ -1,52 +1,52 @@
 .cdk-drag-preview {
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-      0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  }
-  
-  .cdk-drag-placeholder {
-    opacity: 0;
-  }
-  
-  .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
-  .list.cdk-drop-list-dragging .box:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
- .mat-card {
-    cursor: grab;
-    color: rgb(230, 230, 230);
-    position: relative;
-    margin-top: 20px;
-    padding: 12px;
- }
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
 
- .purple {
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.list.cdk-drop-list-dragging .box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.mat-card {
+  cursor: grab;
+  color: rgb(230, 230, 230);
+  position: relative;
+  margin-top: 20px;
+  padding: 12px;
+}
+
+.purple {
   background: #802bb1;
- }
- .blue {
+}
+.blue {
   background: #4056a1;
- }
- .green {
+}
+.green {
   background: #116466;
- }
- .red {
+}
+.red {
   background: #ac3b61;
- }
+}
 .yellow {
   background: #d79922;
 }
 
- .mat-card-title {
+.mat-card-title {
   font-size: 15px;
-   margin: 0;
-   padding: 0 20px 0 5px;
-   word-wrap: break-word;
- }
+  margin: 0;
+  padding: 0 20px 0 5px;
+  word-wrap: break-word;
+}
 
 .mat-card-actions {
   padding: 0;
@@ -56,44 +56,42 @@
   }
 }
 
- .black {
-   color: rgba(58, 58, 58, 0.788);
- }
+.black {
+  color: rgba(58, 58, 58, 0.788);
+}
 
- .form {
-   position: relative;
-   margin-top: 6px;
- }
+.form {
+  position: relative;
+  margin-top: 6px;
+}
 
- .textarea {
-   background-color: #ececec8f;
-   width: 99%;
-   color: rgb(94, 94, 94);
-   padding: 5px 0 0 5px;
-   font-family: Arial, Helvetica, sans-serif;
- }
+.textarea {
+  background-color: #ececec8f;
+  width: 99%;
+  color: rgb(94, 94, 94);
+  padding: 5px 0 0 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
- .textarea:focus {
-   outline: 1px solid rgb(224, 224, 224);
- }
+.textarea:focus {
+  outline: 1px solid rgb(224, 224, 224);
+}
 
- .more {
-     position: absolute;
-     top: 3px;
-     right: 0;
-     margin-right: 0;
+.more {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  margin-right: 0;
+}
 
- }
-
- .button_confirm {
-  position:absolute;
+.button_confirm {
+  position: absolute;
   bottom: 0;
   right: 0;
- 
 }
 
 .button_discard {
-  position:absolute;
+  position: absolute;
   bottom: 0;
   right: 25px;
 }
@@ -101,12 +99,12 @@
 .comments {
   word-wrap: break-word;
   font-size: 13px;
-  
-  &>div {
+
+  & > div {
     margin-top: 10px;
   }
 
-  p{
+  p {
     margin-bottom: 0;
   }
 }

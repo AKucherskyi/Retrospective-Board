@@ -1,5 +1,5 @@
 import { ShareComponent } from './share/share.component';
-import { Column } from './../shared/interfaces';
+import { Column, Comment } from './../shared/interfaces';
 import { AuthService } from './../auth/auth.service';
 import { SnackBarService } from './../shared/snack-bars/snack-bar.service';
 import { PostService } from '../shared/post.service';
@@ -71,6 +71,16 @@ export class ToolbarComponent implements OnInit {
       width: '350px',
       autoFocus: false,
     });
+  }
+
+  parseComments(comments: Comment[] | undefined): string {
+    if (!comments) {
+      return '';
+    }
+    return comments.reduce((acc, curr) => {
+      acc += curr.text + ' by ' + curr.author + ', ';
+      return acc;
+    }, '');
   }
 
   exportexcel(): void {

@@ -74,15 +74,15 @@ export class AuthService {
       );
   }
 
-  logout() {
+  logout(): void {
     this.setToken(null);
   }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return !!this.token;
   }
 
-  private setToken(response: FbAuthResponse | null) {
+  private setToken(response: FbAuthResponse | null): void {
     if (response) {
       const expDate = new Date(
         new Date().getTime() + +response.expiresIn * 1000
@@ -94,21 +94,24 @@ export class AuthService {
     }
   }
 
-  private getUsername(response: FbAuthResponse) {
+  private getUsername(response: FbAuthResponse): Observable<any> {
     return this.http.post(
       `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${environment.apiKey}`,
       { idToken: response.idToken }
     );
   }
 
-  private setUsername(response: FbAuthResponse, username: string) {
+  private setUsername(
+    response: FbAuthResponse,
+    username: string
+  ): Observable<any> {
     return this.http.post(
       `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
       { idToken: response.idToken, displayName: username }
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<any> {
     const { message } = error.error.error;
 
     switch (message) {

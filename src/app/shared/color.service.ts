@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,7 +8,7 @@ export class ColorService {
   colors: string[] = ['red', 'green', 'blue', 'purple', 'yellow'];
   columnColors: { [key: string]: string } = {};
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   getColor(columnId: string) {
     if (!this.columnColors[columnId]) {
@@ -17,7 +18,10 @@ export class ColorService {
   }
 
   deleteColumn(columnId: string) {
-    this.colors.push(this.columnColors[columnId])
-    delete this.columnColors[columnId]
+    if (!this.auth.isAuthenticated()) {
+      return
+    }
+    this.colors.push(this.columnColors[columnId]);
+    delete this.columnColors[columnId];
   }
 }

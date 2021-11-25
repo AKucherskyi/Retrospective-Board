@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Column, ColumnsObj, Post, Comment } from './interfaces';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -15,7 +15,7 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  createColumn(name: string) {
+  createColumn(name: string): Observable<any> {
     this.loading$.next(true);
     const column = { name, posts: [] };
 
@@ -137,16 +137,20 @@ export class PostService {
     );
   }
 
-  getName() {
+  getName(): Observable<any> {
     return this.http.get(`${environment.fbDbUrl}/name.json`);
   }
 
-  changeName(newName: string, columnId?: string) {
+  changeName(newName: string, columnId?: string): Observable<any> {
     if (columnId) {
-      return this.http.patch(`${environment.fbDbUrl}/columns/${columnId}.json`, { name: newName });
+      return this.http.patch(
+        `${environment.fbDbUrl}/columns/${columnId}.json`,
+        { name: newName }
+      );
     } else {
-      return this.http.patch(`${environment.fbDbUrl}/name.json`, { name: newName });
+      return this.http.patch(`${environment.fbDbUrl}/name.json`, {
+        name: newName,
+      });
     }
-    
   }
 }

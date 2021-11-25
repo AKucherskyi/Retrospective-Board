@@ -35,15 +35,15 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  login() {
+  login(): void {
     this.router.navigate(['/login']);
   }
 
-  register() {
+  register(): void {
     this.router.navigate(['/register']);
   }
 
-  logout() {
+  logout(): void {
     this.auth.logout();
     this.auth.username$.next('Anonymous');
     this.router.navigate(['/login']);

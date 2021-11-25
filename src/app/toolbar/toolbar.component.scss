@@ -11,7 +11,7 @@
 }
 
 .name:hover:not(:focus)::after {
-  content: ' \270E';
+  content: " \270E";
 }
 
 .export {
@@ -43,11 +43,21 @@
   outline: 1px solid transparent;
 }
 
-@media  screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .buttons {
     display: none;
   }
   .menu {
     display: block;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .name {
+    display: none;
+  }
+
+  .toolbar {
+    justify-content: flex-end;
   }
 }
