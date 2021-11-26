@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['authFailed']) {
         this.snackBarService.openSnackBar('AUTH');
-        this.router.navigate(['board']);
+        this.router.navigate(['/board']);
       }
     });
   }
