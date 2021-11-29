@@ -1,13 +1,14 @@
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
-import { of, Subject, Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { SnackBarService } from './../shared/snack-bars/snack-bar.service';
 import { AuthService } from './../auth/auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 class RouterStub {
   navigate(path: string[]) {}
@@ -60,8 +61,5 @@ describe('HeaderComponent', () => {
       component.logout()
       expect(spy).toHaveBeenCalledWith(['/login'])
   })
-
-  it('should ')
-
   
 });

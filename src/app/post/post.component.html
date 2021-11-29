@@ -9,16 +9,20 @@
     <mat-icon class="grey">more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button (click)="deletePost()" mat-menu-item>
+    <button (click)="deletePost()" mat-menu-item class="delete_btn">
       <mat-icon>delete</mat-icon>Delete post
     </button>
   </mat-menu>
   <mat-card-actions align="end">
-    <button mat-icon-button (click)="addLike()">
+    <button mat-icon-button (click)="addLike()" class="like_btn">
       <mat-icon [ngClass]="{ black: !liked }">thumb_up_off_alt</mat-icon>
       {{ post.likes }}
     </button>
-    <button mat-icon-button (click)="showComments = !showComments">
+    <button
+      mat-icon-button
+      (click)="showComments = !showComments"
+      class="toggle_comments"
+    >
       <mat-icon [ngClass]="{ black: post.comments?.length == 0 }"
         >chat_bubble_outline</mat-icon
       >

@@ -40,7 +40,7 @@ export class ContentEditDirective {
 
   private changeName() {
     this.postService
-      .changeName(this.el.nativeElement.innerHTML, this.column?.id)
+      .changeName(this.el.nativeElement.textContent, this.column?.id)
       .subscribe(() => {});
   }
 }

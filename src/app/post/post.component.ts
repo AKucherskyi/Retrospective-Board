@@ -40,11 +40,8 @@ export class PostComponent implements OnInit, OnDestroy {
     });
 
     this.post.comments = this.post?.comments || [];
-
     this.userEmail = localStorage.getItem('email') as string;
-
     this.post.likedBy = this.post?.likedBy || '';
-
     this.liked = this.post.likedBy.includes(this.userEmail);
   }
 
@@ -59,7 +56,7 @@ export class PostComponent implements OnInit, OnDestroy {
       date: new Date(),
     };
 
-    let length = this.post.comments ? this.post.comments.length : 0;
+    let length = this.post.comments?.length ?? 0;
 
     this.sSub = this.postService
       .addComment(this.id, this.columnId, length, comment)

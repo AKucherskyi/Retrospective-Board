@@ -76,6 +76,7 @@ export class AuthService {
 
   logout(): void {
     this.setToken(null);
+    this.username$.next('Anonymous');
   }
 
   isAuthenticated(): boolean {
