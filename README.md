@@ -1,6 +1,7 @@
 # RetroBoard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.11.
+## Deployed app
+https://retro-board-e34f7.web.app/board
 
 ## Development server
 
