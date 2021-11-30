@@ -16,6 +16,7 @@ import { PostComponent } from './post.component';
 import { SnackBarService } from '../shared/snack-bars/snack-bar.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 
 describe('PostComponent', () => {
   let component!: PostComponent;
@@ -105,7 +106,7 @@ describe('PostComponent', () => {
 
     it('should call postService.addComment()', () => {
       let service = TestBed.inject(PostService);
-      let spy = spyOn(service, 'addComment');
+      let spy = spyOn(service, 'addComment').and.returnValue(of({}));
       let form = fixture.debugElement.query(By.css('form'));
       form.triggerEventHandler('ngSubmit', null);
       expect(spy).toHaveBeenCalled();

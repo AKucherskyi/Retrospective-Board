@@ -1,13 +1,17 @@
 <div class="container">
   <div class="title">
-    <h2 appContentEdit [column]="column" class="name"> {{ column.name }}</h2>
+    <h2 appContentEdit [column]="column" class="name">{{ column.name }}</h2>
     <button mat-icon-button [mat-menu-trigger-for]="menu" aria-label="options">
       <mat-icon class="grey">more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button (click)="deleteColumn()" mat-menu-item><mat-icon>delete_outline</mat-icon>Delete column</button>
+      <button (click)="deleteColumn()" mat-menu-item class="delete_btn">
+        <mat-icon>delete_outline</mat-icon>Delete column
+      </button>
       <hr />
-      <button (click)="clearColumn()" mat-menu-item><mat-icon>backspace</mat-icon>Clear column</button>
+      <button (click)="clearColumn()" mat-menu-item class="clear_btn">
+        <mat-icon>backspace</mat-icon>Clear column
+      </button>
     </mat-menu>
   </div>
 

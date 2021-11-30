@@ -5,7 +5,7 @@
       <button
         mat-stroked-button
         class="icon"
-        aria-label="button with share icon"
+        aria-label="share button"
         (click)="openDialogShare()"
       >
         Share
@@ -20,7 +20,12 @@
       >
         Add column
       </button>
-      <button mat-flat-button class="export" (click)="exportexcel()">
+      <button
+        mat-flat-button
+        class="export"
+        (click)="exportexcel()"
+        aria-label="export button button"
+      >
         Export
         <mat-icon>cloud_download</mat-icon>
       </button>

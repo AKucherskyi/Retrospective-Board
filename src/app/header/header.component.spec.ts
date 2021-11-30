@@ -9,13 +9,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-
 class RouterStub {
   navigate(path: string[]) {}
 }
 
 class ActivatedRouteStub {
-  queryParams!: Observable<Params>
+  queryParams!: Observable<Params>;
 }
 
 describe('HeaderComponent', () => {
@@ -37,7 +36,6 @@ describe('HeaderComponent', () => {
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    
   });
 
   it('should be created', () => {
@@ -56,10 +54,9 @@ describe('HeaderComponent', () => {
   });
 
   it('should navigate to /login on logout method ', () => {
-      let router = TestBed.inject(Router)
-      let spy = spyOn(router, 'navigate')
-      component.logout()
-      expect(spy).toHaveBeenCalledWith(['/login'])
-  })
-  
+    let router = TestBed.inject(Router);
+    let spy = spyOn(router, 'navigate');
+    component.logout();
+    expect(spy).toHaveBeenCalledWith(['/login']);
+  });
 });
