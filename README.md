@@ -1,4 +1,14 @@
 # RetroBoard
+Board for retrospective
+
+- Create columns
+- Create posts
+- Comments
+- Likes
+- Authorization
+- Export to Exel
+
+Backend: Firebase (auth + realtime database)
 
 ## Deployed app
 https://retro-board-e34f7.web.app/board
